@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -37,18 +37,16 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Class table.
+                        // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO CLASSES VALUES (?, ?, ?, ?, ?, ?)");
-
-                       // pstmt.setString(1, request.getParameter("TITLE"));
+                            "INSERT INTO Courses VALUES (?, ?, ?, ?, ?, ?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("CID")));
-                        pstmt.setString(2, request.getParameter("TITLE"));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("QUARTER")));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("REVIEWSESSDATE")));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("REVIEWSESSTIME")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("Units")));
+                        pstmt.setString(3, request.getParameter("Type"));
+                        pstmt.setString(4, request.getParameter("Grade"));
+                        pstmt.setBoolean(5, Boolean.parseBoolean(request.getParameter("Lab_Req")));
+                        pstmt.setString(6, request.getParameter("prereq"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -66,21 +64,20 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // UPDATE the section attributes in the Class table.
+                        // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Class SET CID = ?, TITLE = ?, QUARTER= ?, " +
-                            "YEAR = ?, REVIEWSESSDATE = ?, REVIEWSESSTIME = ? WHERE TITLE = ?");
+                            "UPDATE Courses SET Units = ?, Type = ?, " +
+                            "Grade = ?, Lab_Req = ?, prereq = ? WHERE CID = ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("CID")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("QUARTER")));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("YEAR")));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("REVIEWSESSDATE")));
-                        pstmt.setString(5, request.getParameter("REVIEWSESSTIME"));
-                       
                         pstmt.setInt(
-                            6, Integer.parseInt(request.getParameter("TITLE")));
+                            1, Integer.parseInt(request.getParameter("Units")));
+                        pstmt.setString(2, request.getParameter("Type"));
+                        pstmt.setString(3, request.getParameter("Grade"));
+                        pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("Lab_Req")));
+                        pstmt.setString(5, request.getParameter("prereq"));
+                        pstmt.setInt(6, Integer.parseInt(request.getParameter("CID")));
                         int rowCount = pstmt.executeUpdate();
-                        
+
                         // Commit transaction
                          conn.commit();
                         conn.setAutoCommit(true);
@@ -96,12 +93,12 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // DELETE the section FROM the Class table.
+                        // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Classes WHERE TITLE = ?");
+                            "DELETE FROM Courses WHERE CID = ?");
 
                         pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("TITLE")));
+                            1, Integer.parseInt(request.getParameter("CID")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -116,32 +113,30 @@
                     Statement statement = conn.createStatement();
 
                     // Use the created statement to SELECT
-                    // the class attributes FROM the Section table.
+                    // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM CLASSES");
+                        ("SELECT * FROM Courses");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>CID</th>
-                        <th>TITLE</th>
-                        <th>QUARTER</th>
-                        <th>YEAR</th>
-                        <th>REVIEWSESSDATE</th>
-                        <th>REVIEWSESSTIME</th>
-
-                        <th>Action</th>
+                        <th>Course Number</th>
+                        <th>Units</th>
+                        <th>Type</th>
+                        <th>Grade</th>
+                        <th>Lab Required</th>
+                        <th>Prereq Completed</th>
                     </tr>
                     <tr>
-                        <form action="classes.jsp" method="get">
+                        <form action="courses.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="CID" size="10"></th>
-                            <th><input value="" name="TITLE" size="10"></th>
-                            <th><input value="" name="QUARTER" size="10"></th>
-                            <th><input value="" name="YEAR" size="10"></th>
-                            <th><input value="" name="REVIEWSESSDATE" size="10"></th>
-                            <th><input value="" name="REVIEWSESSTIME" size="10"></th>
+                            <th><input value="" name="Units" size="10"></th>
+                            <th><input value="" name="Type" size="15"></th>
+			                <th><input value="" name="Grade" size="15"></th>
+                            <th><input value="" name="Lab_Req" size="15"></th>
+                            <th><input value="" name="prereq" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -155,42 +150,43 @@
             %>
 
                     <tr>
-                        <form action="classes.jsp" method="get">
+                        <form action="courses.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the ID, which is a integer --%>
+                            <%-- Get the Course Number, which is a number --%>
                             <td>
                                 <input value="<%= rs.getInt("CID") %>" 
                                     name="CID" size="10">
                             </td>
-                             <%-- Get the TITLE, which is a string --%>
+    
+                            <%-- Get the Units --%>
                             <td>
-                                <input value="<%= rs.getString("TITLE") %>" 
-                                    name="TITLE" size="10">
+                                <input value="<%= rs.getString("Units") %>" 
+                                    name="Units" size="10">
+                            </td>
+    
+                            <%-- Get the Type --%>
+                            <td>
+                                <input value="<%= rs.getString("Type") %>"
+                                    name="Type" size="15">
+                            </td>
+    
+                            <%-- Get the Grade --%>
+                            <td>
+                                <input value="<%= rs.getString("Grade") %>" 
+                                    name="Grade" size="15">
+                            </td>
+    
+			                 <%-- Get the Lab_Req --%>
+                            <td>
+                                <input value="<%= rs.getBoolean("Lab_Req") %>" 
+                                    name="Lab_Req" size="15">
                             </td>
 
-                            <%-- Get the QUARTER, which is a number --%>
+                            <%-- Get the prereq --%>
                             <td>
-                                <input value="<%= rs.getInt("QUARTER") %>" 
-                                    name="QUARTER" size="10">
-                            </td>
-
-                             <%-- Get the YEAR, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("YEAR") %>" 
-                                    name="YEAR" size="10">
-                            </td>
-
-                             <%-- Get the REVIEWSESSDATE, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("REVIEWSESSDATE") %>" 
-                                    name="REVIEWSESSDATE" size="10">
-                            </td>
-
-                            <%-- Get the REVIEWSESSTIME, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("REVIEWSESSTIME") %>" 
-                                    name="REVIEWSESSTIME" size="10">
+                                <input value="<%= rs.getString("prereq") %>" 
+                                    name="prereq" size="15">
                             </td>
     
                             <%-- Button --%>
@@ -198,10 +194,10 @@
                                 <input type="submit" value="Update">
                             </td>
                         </form>
-                        <form action="classes.jsp" method="get">
+                        <form action="courses.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getString("TITLE") %>" name="TITLE">
+                                value="<%= rs.getInt("CID") %>" name="CID">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
