@@ -22,7 +22,10 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
+ 
                         ("jdbc:postgresql://localhost:5432/postgres", 
+ 
+ 
                             "postgres", "cse132b");
 
             %>
@@ -34,16 +37,17 @@
                     if (action != null && action.equals("insert")) {
 
                         // Begin transaction
-                        conn.setAutoCommit(false);                       // Create the prepared statement and use it to
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO FACULTY VALUES (?, ?, ?)");
+                            "INSERT INTO Courses VALUES (?, ?)");
 
-                        pstmt.setString(1, request.getParameter("fname"));
-                        pstmt.setString(2, request.getParameter("title"));
-                        pstmt.setString(3, request.getParameter("department"));
-
-
+ 
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("R_ID")));
+ 
+                        pstmt.setString(2, request.getParameter("SUBJECTS"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -60,23 +64,24 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM FACULTY");
+                        ("SELECT * FROM Research");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Faculty Name</th>
-                        <th>Title</th>
-                        <th>Department</th>
+                        <th>R_ID</th>
+                        <th>SUBJECTS</th>
+                        
                     </tr>
                     <tr>
-                        <form action="faculty.jsp" method="get">
+                        <form action="research.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="fname" size="12" required></th>
-                            <th><input value="" name="title" size="35" required></th>
-                            <th><input value="" name="department" size="35" required></th>
+                            <th><input value="" name="R_ID" size="10"></th>
+                            <th><input value="" name="SUBJECTS" size="10"></th>
+       
                             <th><input type="submit" value="Insert"></th>
+                        </form>
                     </tr>
 
             <%-- -------- Iteration Code -------- --%>
@@ -88,31 +93,47 @@
             %>
 
                     <tr>
-                        <form action="faculty.jsp" method="get">
+                        <form action="research.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the name, which is a string --%>
+                            <%-- Get the Research ID, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("fname") %>" 
-                                    name="fname" size="10">
+ 
+                                <input value="<%= rs.getInt("R_ID") %>" 
+ 
+ 
+                                    name="R_ID" size="10">
                             </td>
     
-                            <%-- Get the title --%>
+                            <%-- Get the SUBJECTS --%>
                             <td>
-                                <input value="<%= rs.getString("title") %>" 
-                                    name="title" size="35">
+                                <input value="<%= rs.getString("SUBJECTS") %>" 
+                                    name="SUBJECTS" size="10">
                             </td>
     
-                            <%-- Get the department --%>
+                           
+    
+                            <%-- Button --%>
                             <td>
-                                <input value="<%= rs.getString("department") %>"
-                                    name="department" size="35">
+                                <input type="submit" value="Update">
                             </td>
+                        </form>
+                        <form action="research.jsp" method="get">
+                            <input type="hidden" value="delete" name="action">
+                            <input type="hidden" 
+
+                                value="<%= rs.getInt("R_ID") %>" name="R_ID">
+ 
+ 
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Delete">
+                            </td>
+                        </form>
                     </tr>
             <%
                     }
             %>
-
 
             <%-- -------- Close Connection Code -------- --%>
             <%

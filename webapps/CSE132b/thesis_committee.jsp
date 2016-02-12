@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5433/postgres", 
+                        ("jdbc:postgresql://localhost:5432/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -37,13 +37,14 @@
                         conn.setAutoCommit(false);                       // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO thesis_committee VALUES (?, ?, ?,?,?)");
+                            "INSERT INTO thesis_committee VALUES (?, ?, ?,?,?,?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("ssn")));
-                        pstmt.setString(2, request.getParameter("p1"));
-                        pstmt.setString(3, request.getParameter("p2"));
-                        pstmt.setString(4, request.getParameter("p3"));
-                        pstmt.setString(5, request.getParameter("p4"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("TCID")));
+                        pstmt.setString(3, request.getParameter("p1"));
+                        pstmt.setString(4, request.getParameter("p2"));
+                        pstmt.setString(5, request.getParameter("p3"));
+                        pstmt.setString(6, request.getParameter("p4"));
 
 
                         int rowCount = pstmt.executeUpdate();
@@ -68,7 +69,8 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SSN</th>
+                        <th>SID</th>
+                        <th>Thesis Committee ID</th>
                         <th>Professor 1</th>
                         <th>Professor 2</th>
                         <th>Professor 3</th>   
@@ -77,7 +79,8 @@
                     <tr>
                         <form action="thesis_committee.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="ssn" size="12" required></th>
+                            <th><input value="" name="SID" size="12" required></th>
+                            <th><input value="" name="TCID" size="12" required></th>
                             <th><input value="" name="p1" size="35" required></th>
                             <th><input value="" name="p2" size="35" required></th>
                             <th><input value="" name="p3" size="35" required></th>
@@ -97,10 +100,16 @@
                         <form action="thesis_committee.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the ssn, which is a number --%>
+                            <%-- Get the SID, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("ssn") %>" 
-                                    name="ssn" size="10">
+                                <input value="<%= rs.getInt("SID") %>" 
+                                    name="SID" size="10">
+                            </td>
+
+                             <%-- Get the TCID, which is a number --%>
+                            <td>
+                                <input value="<%= rs.getInt("TCID") %>" 
+                                    name="TCID" size="10">
                             </td>
     
                             <%-- Get the p1 --%>
