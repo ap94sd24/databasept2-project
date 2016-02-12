@@ -42,7 +42,7 @@
                             "INSERT INTO degree_req VALUES (?, ?, ?, ?, ? ,?, ?, ?, ?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("degree_id")));
-                        pstmt.setString(2, request.getParameter("department"));
+                        pstmt.setString(2, request.getParameter("deptname"));
                         pstmt.setString(3, request.getParameter("degree_name"));
                         pstmt.setString(4, request.getParameter("degree_lvl"));
                         pstmt.setInt(5, Integer.parseInt(request.getParameter("total_units")));
@@ -87,7 +87,7 @@
                         <form action="degree_req.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="degree_id" size="12"></th>
-                            <th><input value="" name="department" size="35"></th>
+                            <th><input value="" name="deptname" size="35"></th>
                             <th><input value="" name="degree_name" size="35"></th>
                             <th><input value="" name="degree_lvl" size="15"></th>
                             <th><input value="" name="total_units" size="12"></th>
@@ -118,8 +118,8 @@
     
                             <%-- Get the Period --%>
                             <td>
-                                <input value="<%= rs.getString("department") %>" 
-                                    name="department" size="35">
+                                <input value="<%= rs.getString("deptname") %>" 
+                                    name="deptname" size="35">
                             </td>
     
                             <%-- Get the Reason --%>
