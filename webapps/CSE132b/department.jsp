@@ -54,6 +54,53 @@
                     }
             %>
 
+             <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the section attributes in the Section table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Section SET DEPTNAME = ? WHERE SECTID = ?");
+
+          
+                        pstmt.setString(1, request.getParameter("DEPTNAME"));
+                  
+                        int rowCount = pstmt.executeUpdate();
+                        
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the section FROM the Section table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Department WHERE DEPTNAME = ?");
+
+                        pstmt.setString(
+                            1, request.getParameter("DEPTNAME"));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                     // Create the statement
