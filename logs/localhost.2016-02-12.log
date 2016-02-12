@@ -1,0 +1,403 @@
+12-Feb-2016 00:21:34.493 SEVERE [http-apr-8080-exec-9] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+12-Feb-2016 00:51:29.080 SEVERE [http-apr-8080-exec-4] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 41 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+38:                         conn.setAutoCommit(false);
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+SimpleDateFormat cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+An error occurred at line: 42 in the jsp file: /review_ses.jsp
+Locale.ENGLISH cannot be resolved to a type
+39:                         final String TIME_FORMAT = "HH:mm";
+40:                         final String DATE_FORMAT = "MM:dd";
+41:                         final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
+42:                         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
+43:                         // Create the prepared statement and use it to
+44:                         // INSERT the student attributes INTO the Student table.
+45:                         PreparedStatement pstmt = conn.prepareStatement(
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+12-Feb-2016 01:20:22.686 SEVERE [http-apr-8080-exec-8] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 46 in the jsp file: /major.jsp
+The method pasrseInt(String) is undefined for the type Integer
+43: 
+44:                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+45: 
+46:                         pstmt.setInt(2, Integer.pasrseInt(request.getParameter("SID")));
+47: 
+48:                         pstmt.setString(3, request.getParameter("TITLE"));
+49:                         pstmt.setString(4, request.getParameter("DEPTNAME"));
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 46 in the jsp file: /major.jsp
+The method pasrseInt(String) is undefined for the type Integer
+43: 
+44:                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+45: 
+46:                         pstmt.setInt(2, Integer.pasrseInt(request.getParameter("SID")));
+47: 
+48:                         pstmt.setString(3, request.getParameter("TITLE"));
+49:                         pstmt.setString(4, request.getParameter("DEPTNAME"));
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+

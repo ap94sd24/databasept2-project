@@ -43,11 +43,11 @@
 
                         pstmt.setInt(
                             1, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("ID")));
-                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
-                       pstmt.setString(4, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(5, request.getParameter("LASTNAME"));
-                        pstmt.setString(6, request.getParameter("RESIDENCY"));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(3, request.getParameter("RESIDENCY"));
+                        pstmt.setString(4, request.getParameter("FIRSTNAME"));
+                       pstmt.setString(5, request.getParameter("MIDDLENAME"));
+                        pstmt.setString(6, request.getParameter("LASTNAME"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -67,16 +67,15 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Student SET ID = ?, FIRSTNAME = ?, " +
+                            "UPDATE Student SET ID = ?,RESIDENCY = ?, FIRSTNAME = ?, " +
                             "MIDDLENAME = ?, LASTNAME = ?, RESIDENCY = ? WHERE SSN = ?");
 
-                        pstmt.setString(1, request.getParameter("ID"));
-                        pstmt.setString(2, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(3, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(4, request.getParameter("LASTNAME"));
-                        pstmt.setString(5, request.getParameter("RESIDENCY"));
-                        pstmt.setInt(
-                            6, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(1, request.getParameter("SID"));
+                        pstmt.setString(2, request.getParameter("STATUS"));
+                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
+                        pstmt.setString(4, request.getParameter("MIDDLENAME"));
+                        pstmt.setString(5, request.getParameter("LASTNAME"));
+                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SSN")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -124,21 +123,22 @@
                     <tr>
                         <th>SSN</th>
                         <th>ID</th>
+                        <th>Status</th>
                         <th>First</th>
             <th>Middle</th>
                         <th>Last</th>
-                        <th>Residency</th>
+                        
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="students.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="SSN" size="10"></th>
-                            <th><input value="" name="ID" size="10"></th>
+                            <th><input value="" name="SID" size="10"></th>
+                            <th><input value="" name="STATUS" size="15"></th>
                             <th><input value="" name="FIRSTNAME" size="15"></th>
                 <th><input value="" name="MIDDLENAME" size="15"></th>
                             <th><input value="" name="LASTNAME" size="15"></th>
-                            <th><input value="" name="RESIDENCY" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -166,6 +166,12 @@
                                 <input value="<%= rs.getString("ID") %>" 
                                     name="ID" size="10">
                             </td>
+
+                             <%-- Get the COLLEGE --%>
+                            <td>
+                                <input value="<%= rs.getString("STATUS") %>" 
+                                    name="STATUS" size="15">
+                            </td>
     
                             <%-- Get the FIRSTNAME --%>
                             <td>
@@ -183,12 +189,6 @@
                             <td>
                                 <input value="<%= rs.getString("LASTNAME") %>" 
                                     name="LASTNAME" size="15">
-                            </td>
-
-                            <%-- Get the COLLEGE --%>
-                            <td>
-                                <input value="<%= rs.getString("RESIDENCY") %>" 
-                                    name="RESIDENCY" size="15">
                             </td>
     
                             <%-- Button --%>

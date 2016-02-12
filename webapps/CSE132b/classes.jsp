@@ -43,7 +43,7 @@
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("CID")));
+                        pstmt.setString(1, request.getParameter("CID"));
                         pstmt.setString(2, request.getParameter("TITLE"));
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("QUARTER")));
                         pstmt.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
@@ -72,7 +72,7 @@
                             "UPDATE Class SET CID = ?, TITLE = ?, QUARTER= ?, " +
                             "YEAR = ?, REVIEWSESSDATE = ?, REVIEWSESSTIME = ? WHERE TITLE = ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("CID")));
+                        pstmt.setString(1, request.getParameter("CID"));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("QUARTER")));
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("YEAR")));
                         pstmt.setInt(4, Integer.parseInt(request.getParameter("REVIEWSESSDATE")));
@@ -161,7 +161,7 @@
 
                             <%-- Get the ID, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("CID") %>" 
+                                <input value="<%= rs.getString("CID") %>" 
                                     name="CID" size="10">
                             </td>
                              <%-- Get the TITLE, which is a string --%>

@@ -1,0 +1,963 @@
+10-Feb-2016 02:01:32.465 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+10-Feb-2016 02:01:32.465 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+10-Feb-2016 02:04:03.277 SEVERE [http-apr-8080-exec-6] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setINT(int, String) is undefined for the type PreparedStatement
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setINT(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setINT(int, String) is undefined for the type PreparedStatement
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setINT(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 02:04:40.439 SEVERE [http-apr-8080-exec-9] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setInt(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setInt(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 02:08:31.146 SEVERE [http-apr-8080-exec-2] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setInt(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setInt(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 02:08:36.821 SEVERE [http-apr-8080-exec-5] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setInt(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 52 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+49: 
+50:                         pstmt.setString(6, request.getParameter("BUILDING"));
+51:                         pstmt.setString(7, request.getParameter("ROOM"));
+52:                         pstmt.setInt(8, request.getParameter("MAXCAP"));
+53:                         int rowCount = pstmt.executeUpdate();
+54: 
+55:                         // Commit transaction
+
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 02:10:48.190 SEVERE [http-apr-8080-exec-8] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 76 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+73:                             "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+
+
+An error occurred at line: 77 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+74:                             " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+
+
+An error occurred at line: 78 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+75: 
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+
+
+An error occurred at line: 79 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+76:                         pstmt.setInt(1, request.getParameter("LECTIME"));
+77:                         pstmt.setInt(2, request.getParameter("LECDATE"));
+78:                         pstmt.setInt(3, request.getParameter("DISCUSSDATE"));
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+
+
+An error occurred at line: 82 in the jsp file: /section.jsp
+The method setInt(int, int) in the type PreparedStatement is not applicable for the arguments (int, String)
+79:                         pstmt.setInt(4, request.getParameter("DISCUSSTIME"));
+80:                         pstmt.setString(5, request.getParameter("BUILDING"));
+81:                         pstmt.setString(6, request.getParameter("ROOM"));
+82:                         pstmt.setInt(7, request.getParameter("MAXCAP"));
+83:                         pstmt.setInt(
+84:                             8, Integer.parseInt(request.getParameter("SECTID")));
+85:                         int rowCount = pstmt.executeUpdate();
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 10:16:13.320 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+10-Feb-2016 10:16:13.320 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+10-Feb-2016 11:01:26.318 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+10-Feb-2016 11:01:26.318 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+10-Feb-2016 12:50:41.689 SEVERE [http-apr-8080-exec-4] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 90 in the jsp file: /section.jsp
+reequest cannot be resolved
+87:                         pstmt.setInt(
+88:                             8, Integer.parseInt(request.getParameter("SECTID")));
+89:                         int rowCount = pstmt.executeUpdate();
+90:                         pstmt.setString(9, reequest.getParameter("TITLE"));
+91: 
+92:                         // Commit transaction
+93:                          conn.commit();
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 90 in the jsp file: /section.jsp
+reequest cannot be resolved
+87:                         pstmt.setInt(
+88:                             8, Integer.parseInt(request.getParameter("SECTID")));
+89:                         int rowCount = pstmt.executeUpdate();
+90:                         pstmt.setString(9, reequest.getParameter("TITLE"));
+91: 
+92:                         // Commit transaction
+93:                          conn.commit();
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 12:51:53.274 SEVERE [http-apr-8080-exec-8] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/CSE132b] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: 89 in the jsp file: /section.jsp
+reequest cannot be resolved
+86:                         pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
+87:                         pstmt.setInt(
+88:                             8, Integer.parseInt(request.getParameter("SECTID")));
+89:                          pstmt.setString(9, reequest.getParameter("TITLE"));
+90:                         int rowCount = pstmt.executeUpdate();
+91:                         
+92:                         // Commit transaction
+
+
+Stacktrace:] with root cause
+ org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: 89 in the jsp file: /section.jsp
+reequest cannot be resolved
+86:                         pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
+87:                         pstmt.setInt(
+88:                             8, Integer.parseInt(request.getParameter("SECTID")));
+89:                          pstmt.setString(9, reequest.getParameter("TITLE"));
+90:                         int rowCount = pstmt.executeUpdate();
+91:                         
+92:                         // Commit transaction
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:450)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:336)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:323)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:585)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:616)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:521)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1096)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:674)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.doRun(AprEndpoint.java:2500)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:2489)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+10-Feb-2016 15:37:50.443 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+10-Feb-2016 15:37:50.443 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
