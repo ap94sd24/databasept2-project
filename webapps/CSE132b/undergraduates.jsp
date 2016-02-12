@@ -39,7 +39,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Participate table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO CLASSES VALUES (?,?)");
+                            "INSERT INTO UNDERGRADUATES VALUES (?,?)");
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 

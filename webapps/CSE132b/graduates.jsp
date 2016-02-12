@@ -12,7 +12,6 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
-            <%@ page language="java" import="java.text.*" %>
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -35,17 +34,19 @@
                     if (action != null && action.equals("insert")) {
 
                         // Begin transaction
-                        conn.setAutoCommit(false);                       // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Student table.
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // INSERT the student attributes INTO the Participate table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
+                            "INSERT INTO GRADUATES VALUES (?,?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setString(2, request.getParameter("R_DATE"));
-                        pstmt.setString(3, request.getParameter("R_TIME"));
-                        pstmt.setString(4, request.getParameter("building"));
+                       // pstmt.setString(1, request.getParameter("TITLE"));
 
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(2, request.getParameter("TYPE"));      
                         int rowCount = pstmt.executeUpdate();
+                    
 
                         // Commit transaction
                         conn.commit();
@@ -59,27 +60,27 @@
                     Statement statement = conn.createStatement();
 
                     // Use the created statement to SELECT
-                    // the student attributes FROM the Student table.
+                    // the class attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM review_ses");
+                        ("SELECT * FROM GRADUATES");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Section ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Building</th>
+                        <th>SID</th>
+                        <th> TYPE </th> 
+
+                        <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="graduates.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="sectionid" size="12"></th>
-                            <th><input value="" name="R_DATE" size="35"></th>
-                            <th><input value="" name="R_TIME" size="35"></th>
-                            <th><input value="" name="building" size="35"></th>
+                            <th><input value="" name="SID" size="10"></th>
+                            <th><input value="" name="TYPE" size="10"></th>
+                           
                             <th><input type="submit" value="Insert"></th>
+                        </form>
                     </tr>
 
             <%-- -------- Iteration Code -------- --%>
@@ -91,36 +92,38 @@
             %>
 
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="undergraduates.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the sectionid, which is a number --%>
+                            <%-- Get the SID, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("sectionid") %>" 
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getInt("SID") %>" 
+                                    name="SID" size="10">
                             </td>
-    
-                            <%-- Get the R_DATE --%>
+                              <%-- Get the TYPE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("R_DATE") %>" 
-                                    name="R_DATE" size="35">
+                                <input value="<%= rs.getString("TYPE") %>" 
+                                    name="TYPE" size="10">
                             </td>
-    
-                            <%-- Get the R_TIME --%>
+                             
+                            <%-- Button --%>
                             <td>
-                                <input value="<%= rs.getString("R_TIME") %>"
-                                    name="R_TIME" size="35">
+                                <input type="submit" value="Update">
                             </td>
-                            <%-- Get the building --%>
+                        </form>
+                        <form action="graduates.jsp" method="get">
+                            <input type="hidden" value="delete" name="action">
+                            <input type="hidden" 
+                                value="<%= rs.getInt("SID,TYPE") %>" name="GRADUATES">
+                            <%-- Button --%>
                             <td>
-                                <input value="<%= rs.getString("building") %>"
-                                    name="building" size="35">
+                                <input type="submit" value="Delete">
                             </td>
+                        </form>
                     </tr>
             <%
                     }
             %>
-
 
             <%-- -------- Close Connection Code -------- --%>
             <%

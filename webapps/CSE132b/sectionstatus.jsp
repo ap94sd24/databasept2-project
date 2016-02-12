@@ -12,7 +12,6 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
-            <%@ page language="java" import="java.text.*" %>
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -35,16 +34,20 @@
                     if (action != null && action.equals("insert")) {
 
                         // Begin transaction
-                        conn.setAutoCommit(false);                       // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Student table.
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
+                            "INSERT INTO SECTIONSTATUS VALUES (?, ?, ?, ?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setString(2, request.getParameter("R_DATE"));
-                        pstmt.setString(3, request.getParameter("R_TIME"));
-                        pstmt.setString(4, request.getParameter("building"));
+                       // pstmt.setString(1, request.getParameter("TITLE"));
 
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SECTID")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTVAL")));
+                        pstmt.setInt(3, Integer.parseInt(request.getParameter("WAITLISTED")));
+                        pstmt.setString(4, request.getParameter("GRADETYPE"));
+                     
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -59,27 +62,30 @@
                     Statement statement = conn.createStatement();
 
                     // Use the created statement to SELECT
-                    // the student attributes FROM the Student table.
+                    // the class attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM review_ses");
+                        ("SELECT * FROM SECTIONSTATUS");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Section ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Building</th>
+                        <th>SECTID</th>
+                        <th>SECTVAL</th>
+                        <th>WAITLISTED</th>
+                        <th>GRADETYPE</th>
+
+                        <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="sectionstatus.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="sectionid" size="12"></th>
-                            <th><input value="" name="R_DATE" size="35"></th>
-                            <th><input value="" name="R_TIME" size="35"></th>
-                            <th><input value="" name="building" size="35"></th>
+                            <th><input value="" name="SECTID" size="10"></th>
+                            <th><input value="" name="SECTVAL" size="10"></th>
+                            <th><input value="" name="WAITLISTED" size="10"></th>
+                            <th><input value="" name="GRADETYPE" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
+                        </form>
                     </tr>
 
             <%-- -------- Iteration Code -------- --%>
@@ -91,36 +97,50 @@
             %>
 
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="sectionstatus.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the sectionid, which is a number --%>
+                            <%-- Get the SECTID, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("sectionid") %>" 
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getInt("SECTID") %>" 
+                                    name="SECTID" size="10">
                             </td>
-    
-                            <%-- Get the R_DATE --%>
+                             <%-- Get the TITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("R_DATE") %>" 
-                                    name="R_DATE" size="35">
+                                <input value="<%= rs.getInt("SECTVAL") %>" 
+                                    name="SECTVAL" size="10">
                             </td>
-    
-                            <%-- Get the R_TIME --%>
+
+                            <%-- Get the WAITLISTED, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("R_TIME") %>"
-                                    name="R_TIME" size="35">
+                                <input value="<%= rs.getInt("WAITLISTED") %>" 
+                                    name="WAITLISTED" size="10">
                             </td>
-                            <%-- Get the building --%>
+
+                             <%-- Get the GRADETYPE, which is a string  --%>
                             <td>
-                                <input value="<%= rs.getString("building") %>"
-                                    name="building" size="35">
+                                <input value="<%= rs.getString("GRADETYPE") %>" 
+                                    name="GRADETYPE" size="10">
                             </td>
+
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Update">
+                            </td>
+                        </form>
+                        <form action="sectionstatus.jsp" method="get">
+                            <input type="hidden" value="delete" name="action">
+                            <input type="hidden" 
+                                value="<%= rs.getString("SECTID,SECTVAL") %>" name="SECTSTATUS">
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Delete">
+                            </td>
+                        </form>
                     </tr>
             <%
                     }
             %>
-
 
             <%-- -------- Close Connection Code -------- --%>
             <%

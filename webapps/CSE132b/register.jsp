@@ -12,7 +12,6 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
-            <%@ page language="java" import="java.text.*" %>
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -35,16 +34,19 @@
                     if (action != null && action.equals("insert")) {
 
                         // Begin transaction
-                        conn.setAutoCommit(false);                       // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Student table.
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
+                            "INSERT INTO CLASSES VALUES (?, ?, ?, ?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setString(2, request.getParameter("R_DATE"));
-                        pstmt.setString(3, request.getParameter("R_TIME"));
-                        pstmt.setString(4, request.getParameter("building"));
+                       // pstmt.setString(1, request.getParameter("SID"));
 
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTID")));
+                        pstmt.setString(3, request.getParameter("ATTENDANCE"));
+                        pstmt.setString(4, request.getParameter("PASTQUARTER"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -59,27 +61,30 @@
                     Statement statement = conn.createStatement();
 
                     // Use the created statement to SELECT
-                    // the student attributes FROM the Student table.
+                    // the class attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM review_ses");
+                        ("SELECT * FROM REGISTER");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Section ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Building</th>
+                        <th>SID</th>
+                        <th>SECTID</th>
+                        <th>ATTENDANCE</th>
+                        <th>PASTQUARTER</th>
+                       
+                        <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="register.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="sectionid" size="12"></th>
-                            <th><input value="" name="R_DATE" size="35"></th>
-                            <th><input value="" name="R_TIME" size="35"></th>
-                            <th><input value="" name="building" size="35"></th>
+                            <th><input value="" name="SID" size="10"></th>
+                            <th><input value="" name="SECTID" size="10"></th>
+                            <th><input value="" name="ATTENDANCE" size="10"></th>
+                            <th><input value="" name="PASTQUARTER" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
+                        </form>
                     </tr>
 
             <%-- -------- Iteration Code -------- --%>
@@ -91,36 +96,51 @@
             %>
 
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="register.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the sectionid, which is a number --%>
+                            <%-- Get the SID, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("sectionid") %>" 
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getInt("SID") %>" 
+                                    name="SID" size="10">
                             </td>
+                             <%-- Get the SECTID, which is a integer --%>
+                            <td>
+                                <input value="<%= rs.getInt("SECTID") %>" 
+                                    name="SECTID" size="10">
+                            </td>
+
+                            <%-- Get the ATTENDANCE, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getString("ATTENDANCE") %>" 
+                                    name="ATTENDANCE" size="10">
+                            </td>
+
+                             <%-- Get the PASTQUARTER, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getString("PASTQUARTER") %>" 
+                                    name="PASTQUARTER" size="10">
+                            </td>
+
     
-                            <%-- Get the R_DATE --%>
+                            <%-- Button --%>
                             <td>
-                                <input value="<%= rs.getString("R_DATE") %>" 
-                                    name="R_DATE" size="35">
+                                <input type="submit" value="Update">
                             </td>
-    
-                            <%-- Get the R_TIME --%>
+                        </form>
+                        <form action="register.jsp" method="get">
+                            <input type="hidden" value="delete" name="action">
+                            <input type="hidden" 
+                                value="<%= rs.getString("SID,SECTID") %>" name="REGISTER">
+                            <%-- Button --%>
                             <td>
-                                <input value="<%= rs.getString("R_TIME") %>"
-                                    name="R_TIME" size="35">
+                                <input type="submit" value="Delete">
                             </td>
-                            <%-- Get the building --%>
-                            <td>
-                                <input value="<%= rs.getString("building") %>"
-                                    name="building" size="35">
-                            </td>
+                        </form>
                     </tr>
             <%
                     }
             %>
-
 
             <%-- -------- Close Connection Code -------- --%>
             <%
