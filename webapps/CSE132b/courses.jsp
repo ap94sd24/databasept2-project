@@ -44,9 +44,9 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO Courses VALUES (?, ?, ?, ?, ?, ?)");
 
-<<<<<<< HEAD
+ 
                         pstmt.setString(1, request.getParameter("CID"));
-=======
+ 
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(3, request.getParameter("Type"));
                         pstmt.setString(4, request.getParameter("Grade"));

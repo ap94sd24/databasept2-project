@@ -39,7 +39,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO CLASSES VALUES (?)");
+                            "INSERT INTO DEPARTMENT VALUES (?)");
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
@@ -73,7 +73,7 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="classes.jsp" method="get">
+                        <form action="department.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="DEPTNAME" size="10"></th>
                            
@@ -90,7 +90,7 @@
             %>
 
                     <tr>
-                        <form action="classes.jsp" method="get">
+                        <form action="department.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
                             <%-- Get the DEPTNAME, which is a string --%>
