@@ -12,11 +12,6 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
- 
-            <%@ page language="java" import="java.lang.*" %>
- 
-            <%@ page language="java" import="java.text.*" %>
- 
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -27,9 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
- 
-                        ("jdbc:postgresql://localhost:5432/postgres",  
-
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -41,31 +34,15 @@
                     if (action != null && action.equals("insert")) {
 
                         // Begin transaction
- 
-                        conn.setAutoCommit(false);
-                        final String TIME_FORMAT = "HH:mm";
-                        final String DATE_FORMAT = "MM:dd";
-                        final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
-                        final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
-                        // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?)");
-
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setTime(2,new Time(dateFormat.parse(request.getParameter("r_date")).getTime()));
-                        pstmt.setTime(3,new Time(timeFormat.parse(request.getParameter("r_time")).getTime()));
- 
                         conn.setAutoCommit(false);                       // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
+                            "INSERT INTO FACULTY VALUES (?, ?, ?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setString(2, request.getParameter("R_DATE"));
-                        pstmt.setString(3, request.getParameter("R_TIME"));
-                        pstmt.setString(4, request.getParameter("building"));
- 
+                        pstmt.setString(1, request.getParameter("fname"));
+                        pstmt.setString(2, request.getParameter("title"));
+                        pstmt.setString(3, request.getParameter("department"));
+
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -83,30 +60,22 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM review_ses");
+                        ("SELECT * FROM FACULTY");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Section ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
- 
- 
-                        <th>Building</th>
- 
+                        <th>Faculty Name</th>
+                        <th>Title</th>
+                        <th>Department</th>
                     </tr>
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="faculty.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="sectionid" size="12"></th>
-                            <th><input value="" name="R_DATE" size="35"></th>
-                            <th><input value="" name="R_TIME" size="35"></th>
- 
- 
-                            <th><input value="" name="building" size="35"></th>
- 
+                            <th><input value="" name="fname" size="12" required></th>
+                            <th><input value="" name="title" size="35" required></th>
+                            <th><input value="" name="department" size="35" required></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>
 
@@ -119,31 +88,25 @@
             %>
 
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="faculty.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the sectionid, which is a number --%>
+                            <%-- Get the name, which is a string --%>
                             <td>
-                                <input value="<%= rs.getInt("sectionid") %>" 
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getString("fname") %>" 
+                                    name="fname" size="10">
                             </td>
     
-                            <%-- Get the R_DATE --%>
+                            <%-- Get the title --%>
                             <td>
-                                <input value="<%= rs.getString("R_DATE") %>" 
-                                    name="R_DATE" size="35">
+                                <input value="<%= rs.getString("title") %>" 
+                                    name="title" size="35">
                             </td>
     
-                            <%-- Get the R_TIME --%>
+                            <%-- Get the department --%>
                             <td>
-                                <input value="<%= rs.getString("R_TIME") %>"
-                                    name="R_TIME" size="35">
-                            </td>
- 
-                            <%-- Get the building --%>
-                            <td>
-                                <input value="<%= rs.getString("building") %>"
-                                    name="building" size="35">
+                                <input value="<%= rs.getString("department") %>"
+                                    name="department" size="35">
                             </td>
                     </tr>
             <%

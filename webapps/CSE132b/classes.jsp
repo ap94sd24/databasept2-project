@@ -50,7 +50,6 @@
                         pstmt.setInt(5, Integer.parseInt(request.getParameter("REVIEWSESSDATE")));
                         pstmt.setInt(6, Integer.parseInt(request.getParameter("REVIEWSESSTIME")));
                         int rowCount = pstmt.executeUpdate();
-                    
 
                         // Commit transaction
                         conn.commit();

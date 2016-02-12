@@ -12,11 +12,6 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
- 
-            <%@ page language="java" import="java.lang.*" %>
- 
-            <%@ page language="java" import="java.text.*" %>
- 
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -27,9 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
- 
-                        ("jdbc:postgresql://localhost:5432/postgres",  
-
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -41,31 +34,17 @@
                     if (action != null && action.equals("insert")) {
 
                         // Begin transaction
- 
-                        conn.setAutoCommit(false);
-                        final String TIME_FORMAT = "HH:mm";
-                        final String DATE_FORMAT = "MM:dd";
-                        final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.ENGLISH);      
-                        final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);                                         
-                        // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?)");
-
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setTime(2,new Time(dateFormat.parse(request.getParameter("r_date")).getTime()));
-                        pstmt.setTime(3,new Time(timeFormat.parse(request.getParameter("r_time")).getTime()));
- 
                         conn.setAutoCommit(false);                       // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
+                            "INSERT INTO thesis_committee VALUES (?, ?, ?,?,?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setString(2, request.getParameter("R_DATE"));
-                        pstmt.setString(3, request.getParameter("R_TIME"));
-                        pstmt.setString(4, request.getParameter("building"));
- 
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("ssn")));
+                        pstmt.setString(2, request.getParameter("p1"));
+                        pstmt.setString(3, request.getParameter("p2"));
+                        pstmt.setString(4, request.getParameter("p3"));
+                        pstmt.setString(5, request.getParameter("p4"));
+
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -83,30 +62,26 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM review_ses");
+                        ("SELECT * FROM thesis_committee");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Section ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
- 
- 
-                        <th>Building</th>
- 
+                        <th>SSN</th>
+                        <th>Professor 1</th>
+                        <th>Professor 2</th>
+                        <th>Professor 3</th>   
+                        <th>Professor 4 (optional)</th>
                     </tr>
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="thesis_committee.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="sectionid" size="12"></th>
-                            <th><input value="" name="R_DATE" size="35"></th>
-                            <th><input value="" name="R_TIME" size="35"></th>
- 
- 
-                            <th><input value="" name="building" size="35"></th>
- 
+                            <th><input value="" name="ssn" size="12" required></th>
+                            <th><input value="" name="p1" size="35" required></th>
+                            <th><input value="" name="p2" size="35" required></th>
+                            <th><input value="" name="p3" size="35" required></th>
+                            <th><input value="" name="p4" size="35"></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>
 
@@ -119,31 +94,37 @@
             %>
 
                     <tr>
-                        <form action="review_ses.jsp" method="get">
+                        <form action="thesis_committee.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the sectionid, which is a number --%>
+                            <%-- Get the ssn, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("sectionid") %>" 
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getInt("ssn") %>" 
+                                    name="ssn" size="10">
                             </td>
     
-                            <%-- Get the R_DATE --%>
+                            <%-- Get the p1 --%>
                             <td>
-                                <input value="<%= rs.getString("R_DATE") %>" 
-                                    name="R_DATE" size="35">
+                                <input value="<%= rs.getString("p1") %>" 
+                                    name="p1" size="35">
                             </td>
     
-                            <%-- Get the R_TIME --%>
+                            <%-- Get the p2 --%>
                             <td>
-                                <input value="<%= rs.getString("R_TIME") %>"
-                                    name="R_TIME" size="35">
+                                <input value="<%= rs.getString("p2") %>"
+                                    name="p2" size="35">
                             </td>
- 
-                            <%-- Get the building --%>
+
+                            <%-- Get the p3 --%>
                             <td>
-                                <input value="<%= rs.getString("building") %>"
-                                    name="building" size="35">
+                                <input value="<%= rs.getString("p3") %>"
+                                    name="p3" size="35">
+                            </td>
+
+                            <%-- Get the p4 --%>
+                            <td>
+                                <input value="<%= rs.getString("p4") %>"
+                                    name="p4" size="35">
                             </td>
                     </tr>
             <%

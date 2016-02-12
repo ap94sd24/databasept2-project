@@ -22,7 +22,10 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
+ 
                         ("jdbc:postgresql://localhost:5432/postgres", 
+ 
+ 
                             "postgres", "cse132b");
 
             %>
@@ -41,7 +44,9 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO Courses VALUES (?, ?, ?, ?, ?, ?)");
 
+<<<<<<< HEAD
                         pstmt.setString(1, request.getParameter("CID"));
+=======
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(3, request.getParameter("Type"));
                         pstmt.setString(4, request.getParameter("Grade"));
@@ -75,7 +80,10 @@
                         pstmt.setString(3, request.getParameter("Grade"));
                         pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("Lab_Req")));
                         pstmt.setString(5, request.getParameter("prereq"));
+ 
                         pstmt.setString(6, request.getParameter("CID"));
+ 
+  
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -96,9 +104,11 @@
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "DELETE FROM Courses WHERE CID = ?");
-
+ 
                         pstmt.setString(
                             1, request.getParameter("CID"));
+ 
+  
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -134,7 +144,10 @@
                             <th><input value="" name="CID" size="10"></th>
                             <th><input value="" name="Units" size="10"></th>
                             <th><input value="" name="Type" size="15"></th>
+ 
                             <th><input value="" name="Grade" size="15"></th>
+ 
+ 
                             <th><input value="" name="Lab_Req" size="15"></th>
                             <th><input value="" name="prereq" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -155,7 +168,10 @@
 
                             <%-- Get the Course Number, which is a number --%>
                             <td>
+ 
                                 <input value="<%= rs.getString("CID") %>" 
+ 
+ 
                                     name="CID" size="10">
                             </td>
     
@@ -177,7 +193,10 @@
                                     name="Grade" size="15">
                             </td>
     
+ 
                              <%-- Get the Lab_Req --%>
+ 
+ 
                             <td>
                                 <input value="<%= rs.getBoolean("Lab_Req") %>" 
                                     name="Lab_Req" size="15">
@@ -197,7 +216,10 @@
                         <form action="courses.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
+
                                 value="<%= rs.getString("CID") %>" name="CID">
+ 
+ 
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
