@@ -34,21 +34,16 @@
                     // Check if an insertion is requested
                     if (action != null && action.equals("insert")) {
 
-                        DateFormat df = new SimpleDateFormat("MM-dd");
-                        java.sql.Date sql_Date = new java.sql.Date(df.parse(request.getParameter("r_date")).getTime());
-
-                        DateFormat tf = new SimpleDateFormat("HH:mm");
-                        java.sql.Date sql_Time = new java.sql.Date(tf.parse(request.getParameter("r_time")).getTime());
-
                         // Begin transaction
                         conn.setAutoCommit(false);                       // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?)");
+                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setDate(2, sql_Date);
-                        pstmt.setDate(3, sql_Time);
+                        pstmt.setString(2, request.getParameter("R_DATE"));
+                        pstmt.setString(3, request.getParameter("R_TIME"));
+                        pstmt.setString(4, request.getParameter("building"));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -75,6 +70,7 @@
                         <th>Section ID</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Building</th>
                     </tr>
                     <tr>
                         <form action="review_ses.jsp" method="get">
@@ -82,6 +78,7 @@
                             <th><input value="" name="sectionid" size="12"></th>
                             <th><input value="" name="R_DATE" size="35"></th>
                             <th><input value="" name="R_TIME" size="35"></th>
+                            <th><input value="" name="building" size="35"></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>
 
@@ -113,6 +110,11 @@
                             <td>
                                 <input value="<%= rs.getString("R_TIME") %>"
                                     name="R_TIME" size="35">
+                            </td>
+                            <%-- Get the building --%>
+                            <td>
+                                <input value="<%= rs.getString("building") %>"
+                                    name="building" size="35">
                             </td>
                     </tr>
             <%
