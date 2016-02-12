@@ -1,78 +1,103 @@
-<b>Data Entry Menu</b>
-<ul>
- 
-    <li>
-       <a href="students.jsp">Students<a>
-    </li>
-     <li>
-        <a href="department.jsp"> Department <a>  
-    </li>
-    <li>
-    	<a href="major.jsp"> Major <a>  
-    </li>
-    <li>
-    	<a href="minor.jsp"> Minor <a>  
-    </li>
-    <li> 
-        <a href="courses.jsp">Courses<a>
-    </li>   
-     <li>
-        <a href="classes.jsp"> Classes<a>  
-    </li>
-     <li>
-        <a href="section.jsp"> Section<a>  
-    </li>
-     <li>
-        <a href="sectionstatus.jsp"> Section Status<a>  
-    </li>
-     <li>
-        <a href="prereq.jsp"> Prerequisite <a>  
-    </li>
+<style>
 
-     <li>
-        <a href="courseclass.jsp"> CourseClasses<a>  
-    </li>
-    
-     <li>
-        <a href="probation.jsp"> Probation<a>  
-    </li>
-     <li>
-        <a href="review_ses.jsp"> Review Session<a>  
-    </li>
-    <li>
-        <a href="requireslab.jsp"> Requireslabs <a>  
-    </li>
-    <li>
-        <a href="thesis_committee.jsp"> Thesis_committee <a>  
-    </li>
-    <li> 
-    	<a href="faculty.jsp"> Faculty <a> 
-    </li> 
+body{
+	background-image: url("back.jpg");
+	background-image: center;
+	font-family: Arial;
+}
 
-     <li> 
-    	<a href="advises.jsp"> Advise <a> 
-    </li> 
+.block li{
+background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  text-align: center;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 
+} 
 
-     <li> 
-    	<a href="research.jsp"> Research <a> 
-    </li> 
+li a {
+	text-decoration: none;
+	text-align: center;
+	color: white;
+}
+tr{
+	    color: white;
+}
+input[type=submit] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    color: green;
+}
 
-     <li> 
-    	<a href="participate.jsp"> Participate <a> 
-    </li> 
-
-     <li> 
-    	<a href="graduates.jsp"> Graduates <a> 
-    </li> 
-     <li> 
-    	<a href="undergraduates.jsp"> Undergraduates <a> 
-    </li> 
-     <li> 
-    	<a href="register.jsp"> Register <a> 
-    </li> 
-     <li> 
-    	<a href="prev_degree.jsp"> Prev_Degree <a> 
-    </li> 
- 
-</ul>
+p{
+	text-align: center;
+}
+</style>
+<body>
+	<table>
+	<tbody>
+	<tr>
+	<td class="block">
+	<p><b>Data Entry Menu</b></p>
+		<ul>
+		<!-- 
+		    <li>
+		        <a href="courses.jsp">Courses<a>
+		    </li>
+		    <li>
+		        <a href="classes.jsp">Classes<a>
+		    </li>
+		-->
+		<!--    <li>
+		        <a href="students.jsp" class="active">Students<a>
+		    </li>
+		    <li> 
+		        <a href="section.jsp" class="active">Section<a>
+		    </li>
+		    <li>
+		      <a href="classes.jsp" class="active"> Classes<a>  
+		    </li>
+		    -->
+		    <li>
+		    	<a href="probation.jsp" class="active">Probation</a>
+		    </li>
+		    <li>
+		    	<a href="courses.jsp" class="active">Courses</a>
+		    </li>
+		    <li>
+		    	<a href="thesis_committee.jsp" class="active">Thesis Committee</a>
+		    </li>
+		    <li>
+		    	<a href="faculty.jsp" class="active">Faculty</a>
+		    </li>
+		    <li>
+		    	<a href="review_ses.jsp" class="active">Review Session</a>
+		    </li>
+		    <li>
+		    	<a href="five_year.jsp" class="active">Five Year Students</a>
+		    </li>
+		</ul>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+</body>
