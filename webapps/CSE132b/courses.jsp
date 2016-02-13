@@ -22,10 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
- 
                         ("jdbc:postgresql://localhost:5432/postgres", 
- 
- 
                             "postgres", "cse132b");
 
             %>
@@ -44,14 +41,12 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO Courses VALUES (?, ?, ?, ?, ?, ?)");
 
- 
                         pstmt.setString(1, request.getParameter("CID"));
- 
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("Units")));
-                        pstmt.setString(3, request.getParameter("Type"));
-                        pstmt.setString(4, request.getParameter("Grade"));
-                        pstmt.setBoolean(5, Boolean.parseBoolean(request.getParameter("Lab_Req")));
-                        pstmt.setString(6, request.getParameter("prereq"));
+                        pstmt.setString(2, request.getParameter("PREREQID"));
+                        pstmt.setInt(3, Integer.parseInt(request.getParameter("Units")));
+                        pstmt.setString(4, request.getParameter("Type"));
+                        pstmt.setString(5, request.getParameter("Grade"));
+                        pstmt.setString(6, request.getParameter("Lab_Req"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -72,18 +67,15 @@
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "UPDATE Courses SET Units = ?, Type = ?, " +
-                            "Grade = ?, Lab_Req = ?, prereq = ? WHERE CID = ?");
+                            "Grade = ?, Lab_Req = ?, prereqid = ? WHERE CID = ?");
 
                         pstmt.setInt(
                             1, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(2, request.getParameter("Type"));
                         pstmt.setString(3, request.getParameter("Grade"));
-                        pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("Lab_Req")));
-                        pstmt.setString(5, request.getParameter("prereq"));
- 
-                        pstmt.setString(6, request.getParameter("CID"));
- 
-  
+                        pstmt.setString(4, request.getParameter("Lab_Req"));
+                        pstmt.setString(5, request.getParameter("prereqid"));
+                        pstmt.setInt(6, Integer.parseInt(request.getParameter("CID")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -104,11 +96,9 @@
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "DELETE FROM Courses WHERE CID = ?");
- 
+
                         pstmt.setString(
                             1, request.getParameter("CID"));
- 
-  
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -131,25 +121,22 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Course Number</th>
+                        <th>Course Id</th>
+                        <th>Pre Req Id</th>
                         <th>Units</th>
                         <th>Type</th>
                         <th>Grade</th>
                         <th>Lab Required</th>
-                        <th>Prereq Completed</th>
                     </tr>
                     <tr>
                         <form action="courses.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="CID" size="10"></th>
+                            <th><input value="" name="PREREQID" size="10"></th>
                             <th><input value="" name="Units" size="10"></th>
                             <th><input value="" name="Type" size="15"></th>
- 
                             <th><input value="" name="Grade" size="15"></th>
- 
- 
                             <th><input value="" name="Lab_Req" size="15"></th>
-                            <th><input value="" name="prereq" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -168,16 +155,13 @@
 
                             <%-- Get the Course Number, which is a number --%>
                             <td>
- 
                                 <input value="<%= rs.getString("CID") %>" 
- 
- 
                                     name="CID" size="10">
                             </td>
     
                             <%-- Get the Units --%>
                             <td>
-                                <input value="<%= rs.getString("Units") %>" 
+                                <input value="<%= rs.getInt("Units") %>" 
                                     name="Units" size="10">
                             </td>
     
@@ -193,12 +177,9 @@
                                     name="Grade" size="15">
                             </td>
     
- 
                              <%-- Get the Lab_Req --%>
- 
- 
                             <td>
-                                <input value="<%= rs.getBoolean("Lab_Req") %>" 
+                                <input value="<%= rs.getString("Lab_Req") %>" 
                                     name="Lab_Req" size="15">
                             </td>
 
@@ -216,10 +197,7 @@
                         <form action="courses.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-
                                 value="<%= rs.getString("CID") %>" name="CID">
- 
- 
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

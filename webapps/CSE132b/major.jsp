@@ -39,7 +39,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Section VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)");
+                            "INSERT INTO Major VALUES (?, ?, ?, ?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
 

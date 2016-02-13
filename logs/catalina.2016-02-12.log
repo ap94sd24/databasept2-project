@@ -50,3 +50,56 @@
 12-Feb-2016 12:16:31.666 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
 12-Feb-2016 12:16:31.672 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
 12-Feb-2016 12:16:31.673 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 2899 ms
+12-Feb-2016 16:03:55.778 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.30
+12-Feb-2016 16:03:55.781 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Dec 1 2015 22:30:46 UTC
+12-Feb-2016 16:03:55.782 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.30.0
+12-Feb-2016 16:03:55.782 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+12-Feb-2016 16:03:55.783 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+12-Feb-2016 16:03:55.784 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+12-Feb-2016 16:03:55.784 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk1.8.0_72\jre
+12-Feb-2016 16:03:55.785 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_72-b15
+12-Feb-2016 16:03:55.786 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+12-Feb-2016 16:03:55.787 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\Program Files\apache-tomcat-8.0.30
+12-Feb-2016 16:03:55.788 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Program Files\apache-tomcat-8.0.30
+12-Feb-2016 16:03:55.789 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\Program Files\apache-tomcat-8.0.30\conf\logging.properties
+12-Feb-2016 16:03:55.789 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+12-Feb-2016 16:03:55.790 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=C:\Program Files\apache-tomcat-8.0.30\endorsed
+12-Feb-2016 16:03:55.791 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\Program Files\apache-tomcat-8.0.30
+12-Feb-2016 16:03:55.792 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Program Files\apache-tomcat-8.0.30
+12-Feb-2016 16:03:55.793 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\Program Files\apache-tomcat-8.0.30\temp
+12-Feb-2016 16:03:55.795 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.1.33 using APR version 1.5.1.
+12-Feb-2016 16:03:55.796 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+12-Feb-2016 16:03:56.936 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.1m 19 Mar 2015)
+12-Feb-2016 16:03:57.233 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
+12-Feb-2016 16:03:57.256 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
+12-Feb-2016 16:03:57.260 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 2378 ms
+12-Feb-2016 16:03:57.318 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+12-Feb-2016 16:03:57.320 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.30
+12-Feb-2016 16:03:57.343 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\CSE132b
+12-Feb-2016 16:03:57.428 WARNING [localhost-startStop-1] org.apache.catalina.startup.SetContextPropertiesRule.begin [SetContextPropertiesRule]{Context} Setting property 'debug' to '0' did not find a matching property.
+12-Feb-2016 16:03:58.667 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+12-Feb-2016 16:03:58.864 INFO [localhost-startStop-1] org.apache.catalina.util.SessionIdGeneratorBase.createSecureRandom Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [138] milliseconds.
+12-Feb-2016 16:03:58.902 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\CSE132b has finished in 1,559 ms
+12-Feb-2016 16:03:58.904 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\docs
+12-Feb-2016 16:03:58.919 WARNING [localhost-startStop-1] org.apache.catalina.startup.SetContextPropertiesRule.begin [SetContextPropertiesRule]{Context} Setting property 'debug' to '0' did not find a matching property.
+12-Feb-2016 16:03:59.558 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+12-Feb-2016 16:03:59.563 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\docs has finished in 660 ms
+12-Feb-2016 16:03:59.564 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\examples
+12-Feb-2016 16:03:59.569 WARNING [localhost-startStop-1] org.apache.catalina.startup.SetContextPropertiesRule.begin [SetContextPropertiesRule]{Context} Setting property 'debug' to '0' did not find a matching property.
+12-Feb-2016 16:04:01.539 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+12-Feb-2016 16:04:01.682 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\examples has finished in 2,118 ms
+12-Feb-2016 16:04:01.682 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\host-manager
+12-Feb-2016 16:04:01.697 WARNING [localhost-startStop-1] org.apache.catalina.startup.SetContextPropertiesRule.begin [SetContextPropertiesRule]{Context} Setting property 'debug' to '0' did not find a matching property.
+12-Feb-2016 16:04:02.320 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+12-Feb-2016 16:04:02.330 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\host-manager has finished in 647 ms
+12-Feb-2016 16:04:02.330 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\manager
+12-Feb-2016 16:04:02.342 WARNING [localhost-startStop-1] org.apache.catalina.startup.SetContextPropertiesRule.begin [SetContextPropertiesRule]{Context} Setting property 'debug' to '0' did not find a matching property.
+12-Feb-2016 16:04:02.944 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+12-Feb-2016 16:04:02.964 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\manager has finished in 634 ms
+12-Feb-2016 16:04:02.965 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\ROOT
+12-Feb-2016 16:04:02.969 WARNING [localhost-startStop-1] org.apache.catalina.startup.SetContextPropertiesRule.begin [SetContextPropertiesRule]{Context} Setting property 'debug' to '0' did not find a matching property.
+12-Feb-2016 16:04:03.443 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+12-Feb-2016 16:04:03.448 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory C:\Program Files\apache-tomcat-8.0.30\webapps\ROOT has finished in 483 ms
+12-Feb-2016 16:04:03.460 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
+12-Feb-2016 16:04:03.474 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
+12-Feb-2016 16:04:03.476 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 6215 ms

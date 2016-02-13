@@ -42,7 +42,7 @@
                             "INSERT INTO Courses VALUES (?, ?, ?, ?, ?, ?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("Course_No")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("Units")));
+                         pstmt.setInt(2, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(3, request.getParameter("Type"));
                         pstmt.setString(4, request.getParameter("Grade"));
                         pstmt.setBoolean(5, Boolean.parseBoolean(request.getParameter("Lab_Req")));
