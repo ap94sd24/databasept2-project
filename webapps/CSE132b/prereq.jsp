@@ -1,9 +1,9 @@
 <html>
 
 <body>
-    <table border="1">
+    <table border="1" style="background-color:rgba(0,0,0,0.5);">
         <tr>
-            <td valign="top">
+            <td valign="top" background: linear-gradient(to bottom, blue, white);>
                 <%-- -------- Include menu HTML code -------- --%>
                 <jsp:include page="menu.html" />
             </td>

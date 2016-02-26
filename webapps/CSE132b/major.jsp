@@ -1,7 +1,7 @@
 <html>
 
 <body>
-    <table border="1">
+    <table border="1"style="background-color:rgba(0,0,0,0.5);">
         <tr>
             <td valign="top">
                 <%-- -------- Include menu HTML code -------- --%>
@@ -56,6 +56,55 @@
                     }
             %>
 
+             <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the major attributes in the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Major SET SSN = ?,SID = ?, TITLE = ?, " +
+                            "DEPTNAME= ? WHERE TITLE = ?");
+
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(3, request.getParameter("TITLE"));
+                        pstmt.setString(4, request.getParameter("DEPTNAME"));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+              <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the student FROM the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Major WHERE TITLE= ?");
+
+                        pstmt.setString(
+                            1, request.getParameter("TITLE"));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+       
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                     // Create the statement
