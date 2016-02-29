@@ -39,14 +39,13 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO SECTIONSTATUS VALUES (?, ?, ?, ?)");
+                            "INSERT INTO SECTIONSTATUS VALUES (?, ?, ?)");
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SECTID")));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTVAL")));
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("WAITLISTED")));
-                        pstmt.setString(4, request.getParameter("GRADETYPE"));
                      
                         int rowCount = pstmt.executeUpdate();
 
@@ -73,7 +72,6 @@
                         <th>SECTID</th>
                         <th>SECTVAL</th>
                         <th>WAITLISTED</th>
-                        <th>GRADETYPE</th>
 
                         <th>Action</th>
                     </tr>
@@ -83,7 +81,6 @@
                             <th><input value="" name="SECTID" size="10"></th>
                             <th><input value="" name="SECTVAL" size="10"></th>
                             <th><input value="" name="WAITLISTED" size="10"></th>
-                            <th><input value="" name="GRADETYPE" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -115,12 +112,6 @@
                             <td>
                                 <input value="<%= rs.getInt("WAITLISTED") %>" 
                                     name="WAITLISTED" size="10">
-                            </td>
-
-                             <%-- Get the GRADETYPE, which is a string  --%>
-                            <td>
-                                <input value="<%= rs.getString("GRADETYPE") %>" 
-                                    name="GRADETYPE" size="10">
                             </td>
 
                             <%-- Button --%>

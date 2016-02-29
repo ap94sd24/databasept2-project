@@ -39,17 +39,72 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Participate table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO GRADUATES VALUES (?,?)");
+                            "INSERT INTO GRADUATES VALUES (?,?,?,?)");
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("TYPE"));      
+                        pstmt.setString(2, request.getParameter("TYPE"));     
+                        pstmt.setString(3, request.getParameter("CONCENTRATION"));
+                        pstmt.setInt(4, Integer.parseInt(request.getParameter("DEGREEID")));
                         int rowCount = pstmt.executeUpdate();
                     
 
                         // Commit transaction
                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+               <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the student attributes in the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Graduates SET SID = ?, TYPE = ?, CONCENTRATION = ?, " +
+                            "DEGREEID= ? WHERE SID = ? and TYPE = ?");
+ 
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(2, request.getParameter("TYPE"));     
+                        pstmt.setString(3, request.getParameter("CONCENTRATION"));
+                        pstmt.setInt(4, Integer.parseInt(request.getParameter("DEGREEID"))); 
+
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the student FROM the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Undergraduates WHERE SID = ? and TYPE = ?");
+
+                        pstmt.setInt(
+                            1, Integer.parseInt(request.getParameter("SID")));
+                        
+                        pstmt.setString(2, request.getParameter("TYPE"));
+                        int rowCount = pstmt.executeUpdate();
+                       
+
+                        // Commit transaction
+                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -70,6 +125,8 @@
                     <tr>
                         <th>SID</th>
                         <th> TYPE </th> 
+                        <th> CONCENTRATION </th>
+                        <th> DEGREEID </th> 
 
                         <th>Action</th>
                     </tr>
@@ -78,6 +135,8 @@
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="SID" size="10"></th>
                             <th><input value="" name="TYPE" size="10"></th>
+                            <th><input value="" name="CONCENTRATION" size="10"></th>
+                            <th><input value="" name="DEGREEID" size="10"></th>
                            
                             <th><input type="submit" value="Insert"></th>
                         </form>
@@ -92,7 +151,7 @@
             %>
 
                     <tr>
-                        <form action="undergraduates.jsp" method="get">
+                        <form action="graduates.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
                             <%-- Get the SID, which is a integer --%>
@@ -104,6 +163,18 @@
                             <td>
                                 <input value="<%= rs.getString("TYPE") %>" 
                                     name="TYPE" size="10">
+                            </td>
+
+                            <%-- Get the CONCENTRATION, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getString("CONCENTRATION") %>" 
+                                    name="CONCENTRATION" size="10">
+                            </td>
+
+                             <%-- Get the DEGREEID, which is a int --%>
+                            <td>
+                                <input value="<%= rs.getInt("DEGREEID") %>" 
+                                    name="DEGREEID" size="10">
                             </td>
                              
                             <%-- Button --%>

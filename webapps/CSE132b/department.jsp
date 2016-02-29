@@ -65,7 +65,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the section attributes in the Section table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Section SET DEPTNAME = ? WHERE SECTID = ?");
+                            "UPDATE Department SET DEPTNAME = ? WHERE DEPTNAME = ?");
 
           
                         pstmt.setString(1, request.getParameter("DEPTNAME"));

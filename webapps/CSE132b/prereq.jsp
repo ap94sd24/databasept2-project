@@ -39,11 +39,10 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO PREREQ VALUES (?, ?, ?)");
+                            "INSERT INTO PREREQ VALUES (?, ?)");
 
                         pstmt.setString(1, request.getParameter("PREREQID"));
                         pstmt.setString(2, request.getParameter("CID"));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("PREREQCOUNT")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -51,7 +50,54 @@
                         conn.setAutoCommit(true);
                     }
             %>
- 
+
+             <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the section attributes in the Section table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Prereq SET PREREQID = ?, CID = ? WHERE PREREQID = ?");
+
+                        pstmt.setString(1, request.getParameter("PREREQID"));
+                        pstmt.setString(2, request.getParameter("CID"));
+                  
+                        int rowCount = pstmt.executeUpdate();
+                        
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the section FROM the Section table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Prereq WHERE PREREQID = ?");
+
+                        pstmt.setString(
+                            1, request.getParameter("PREREQID"));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
 
             <%-- -------- SELECT Statement Code -------- --%>
             <%
@@ -69,14 +115,12 @@
                     <tr>
                         <th>Prereq_ID</th>
                         <th>CID</th>
-                        <th>Prequisite Count</th>
                     </tr>
                     <tr>
                         <form action="prereq.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="PREREQID" size="10"></th>
                             <th><input value="" name="CID" size="10"></th>
-                            <th><input value="" name="PREREQCOUNT" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -105,11 +149,6 @@
                                     name="CID" size="10">
                             </td>
     
-                            <%-- Get the Type --%>
-                            <td>
-                                <input value="<%= rs.getInt("PREREQCOUNT") %>"
-                                    name="PREREQCOUNT" size="15">
-                            </td>
     
                             <%-- Button --%>
                             <td>

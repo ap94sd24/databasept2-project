@@ -46,7 +46,7 @@
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("SID")));
                         pstmt.setString(3, request.getParameter("STATUS"));
                         pstmt.setString(4, request.getParameter("FIRSTNAME"));
-                       pstmt.setString(5, request.getParameter("MIDDLENAME"));
+                        pstmt.setString(5, request.getParameter("MIDDLENAME"));
                         pstmt.setString(6, request.getParameter("LASTNAME"));
                         int rowCount = pstmt.executeUpdate();
 
@@ -68,14 +68,14 @@
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "UPDATE Student SET SID = ?,STATUS = ?, FIRSTNAME = ?, " +
-                            "MIDDLENAME = ?, LASTNAME = ? WHERE SSN = ?");
+                            "MIDDLENAME = ?, LASTNAME = ? WHERE SID = ?");
 
-                        pstmt.setString(1, request.getParameter("SID"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(2, request.getParameter("STATUS"));
                         pstmt.setString(3, request.getParameter("FIRSTNAME"));
                         pstmt.setString(4, request.getParameter("MIDDLENAME"));
                         pstmt.setString(5, request.getParameter("LASTNAME"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SID")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -95,10 +95,10 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Student WHERE SSN = ?");
+                            "DELETE FROM Student WHERE SID = ?");
 
                         pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SSN")));
+                            1, Integer.parseInt(request.getParameter("SID")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -122,12 +122,12 @@
                 <table border="1">
                     <tr>
                         <th>SSN</th>
-                        <th>ID</th>
+                        <th>SID</th>
                         <th>Status</th>
                         <th>First</th>
-            <th>Middle</th>
+                      <th>Middle</th>
                         <th>Last</th>
-                        
+                                           
                         <th>Action</th>
                     </tr>
                     <tr>
@@ -139,6 +139,7 @@
                             <th><input value="" name="FIRSTNAME" size="15"></th>
                 <th><input value="" name="MIDDLENAME" size="15"></th>
                             <th><input value="" name="LASTNAME" size="15"></th>
+
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -163,7 +164,7 @@
     
                             <%-- Get the SID --%>
                             <td>
-                                <input value="<%= rs.getString("SID") %>" 
+                                <input value="<%= rs.getInt("SID") %>" 
                                     name="SID" size="10">
                             </td>
 
@@ -185,7 +186,7 @@
                                     name="MIDDLENAME" size="15">
                             </td>
     
-                <%-- Get the LASTNAME --%>
+                             <%-- Get the LASTNAME --%>
                             <td>
                                 <input value="<%= rs.getString("LASTNAME") %>" 
                                     name="LASTNAME" size="15">
@@ -199,7 +200,7 @@
                         <form action="students.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("SSN") %>" name="SSN">
+                                value="<%= rs.getInt("SID") %>" name="SID">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

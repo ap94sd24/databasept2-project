@@ -46,7 +46,7 @@
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(4, request.getParameter("Type"));
                         pstmt.setString(5, request.getParameter("Grade"));
-                        pstmt.setString(6, request.getParameter("Lab_Req"));
+                        pstmt.setBoolean(6, request.getParameter("Lab_Req"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -73,7 +73,7 @@
                             1, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(2, request.getParameter("Type"));
                         pstmt.setString(3, request.getParameter("Grade"));
-                        pstmt.setString(4, request.getParameter("Lab_Req"));
+                        pstmt.setBoolean(4, request.getParameter("Lab_Req"));
                         pstmt.setString(5, request.getParameter("prereqid"));
                         pstmt.setInt(6, Integer.parseInt(request.getParameter("CID")));
                         int rowCount = pstmt.executeUpdate();
@@ -158,6 +158,13 @@
                                 <input value="<%= rs.getString("CID") %>" 
                                     name="CID" size="10">
                             </td>
+
+                             <%-- Get the PREREQID, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getString("CID") %>" 
+                                    name="CID" size="10">
+                            </td>
+    
     
                             <%-- Get the Units --%>
                             <td>
@@ -179,14 +186,8 @@
     
                              <%-- Get the Lab_Req --%>
                             <td>
-                                <input value="<%= rs.getString("Lab_Req") %>" 
+                                <input value="<%= rs.getBoolean("Lab_Req") %>" 
                                     name="Lab_Req" size="15">
-                            </td>
-
-                            <%-- Get the prereq --%>
-                            <td>
-                                <input value="<%= rs.getString("prereq") %>" 
-                                    name="prereq" size="15">
                             </td>
     
                             <%-- Button --%>
