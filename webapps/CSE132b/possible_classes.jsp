@@ -37,17 +37,14 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // INSERT the student attributes INTO the Student table.
+                        // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Student VALUES (?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO POSSIBLE_CLASSES VALUES (?, ?)");
 
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(3, request.getParameter("STATUS"));
-                        pstmt.setString(4, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(5, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(6, request.getParameter("LASTNAME"));
+                       // pstmt.setString(1, request.getParameter("TITLE"));
+
+                        pstmt.setString(1, request.getParameter("POSS_CLASSES_ID"));
+                        pstmt.setString(2, request.getParameter("TITLE"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -65,19 +62,15 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
+                        // UPDATE the section attributes in the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Student SET SID = ?,STATUS = ?, FIRSTNAME = ?, " +
-                            "MIDDLENAME = ?, LASTNAME = ? WHERE SID = ?");
+                            "UPDATE POSSIBLE_CLASSES SET POSS_CLASSES_ID = ?, TITLE = ? " +
+                            "WHERE TITLE = ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setString(2, request.getParameter("STATUS"));
-                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(4, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(5, request.getParameter("LASTNAME"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(1, request.getParameter("POSS_CLASSES_ID"));
+                        pstmt.setString(2, request.getParameter("TITLE"));
                         int rowCount = pstmt.executeUpdate();
-
+                        
                         // Commit transaction
                          conn.commit();
                         conn.setAutoCommit(true);
@@ -93,12 +86,12 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
+                        // DELETE the section FROM the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Student WHERE SID = ?");
+                            "DELETE FROM POSS_CLASSES_ID WHERE TITLE = ?");
 
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(
+                            1, request.getParameter("TITLE"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -113,33 +106,23 @@
                     Statement statement = conn.createStatement();
 
                     // Use the created statement to SELECT
-                    // the student attributes FROM the Student table.
+                    // the class attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Student");
+                        ("SELECT * FROM POSS_CLASSES_ID");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SSN</th>
-                        <th>SID</th>
-                        <th>Status</th>
-                        <th>First</th>
-                      <th>Middle</th>
-                        <th>Last</th>
-                                           
+                        <th>POSS_CLASSES_ID</th>
+                        <th>TITLE</th>
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="students.jsp" method="get">
+                        <form action="possible_classes.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SSN" size="10"></th>
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="STATUS" size="15"></th>
-                            <th><input value="" name="FIRSTNAME" size="15"></th>
-                <th><input value="" name="MIDDLENAME" size="15"></th>
-                            <th><input value="" name="LASTNAME" size="15"></th>
-
+                            <th><input value="" name="POSS_CLASSES_ID" size="10"></th>
+                            <th><input value="" name="TITLE" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -153,54 +136,29 @@
             %>
 
                     <tr>
-                        <form action="students.jsp" method="get">
+                        <form action="possible_classes.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SSN, which is a number --%>
+                            <%-- Get the possible clases id, which is a string --%>
                             <td>
-                                <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SSN" size="10">
+                                <input value="<%= rs.getString("POSS_CLASSES_ID") %>" 
+                                    name="POSS_CLASSES_ID" size="10">
                             </td>
-    
-                            <%-- Get the SID --%>
+                             <%-- Get the TITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getString("TITLE") %>" 
+                                    name="TITLE" size="10">
                             </td>
 
-                             <%-- Get the COLLEGE --%>
-                            <td>
-                                <input value="<%= rs.getString("STATUS") %>" 
-                                    name="STATUS" size="15">
-                            </td>
-    
-                            <%-- Get the FIRSTNAME --%>
-                            <td>
-                                <input value="<%= rs.getString("FIRSTNAME") %>"
-                                    name="FIRSTNAME" size="15">
-                            </td>
-    
-                            <%-- Get the LASTNAME --%>
-                            <td>
-                                <input value="<%= rs.getString("MIDDLENAME") %>" 
-                                    name="MIDDLENAME" size="15">
-                            </td>
-    
-                             <%-- Get the LASTNAME --%>
-                            <td>
-                                <input value="<%= rs.getString("LASTNAME") %>" 
-                                    name="LASTNAME" size="15">
-                            </td>
-    
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
                             </td>
                         </form>
-                        <form action="students.jsp" method="get">
+                        <form action="possible_classes.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("SID") %>" name="SID">
+                                value="<%= rs.getString("TITLE") %>" name="TITLE">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

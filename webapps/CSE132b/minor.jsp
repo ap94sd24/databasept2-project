@@ -39,7 +39,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Minor VALUES (?, ?, ?, ?)");
+                            "INSERT INTO Minor VALUES (?, ?, ?, ?,?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
 
@@ -47,6 +47,7 @@
 
                         pstmt.setString(3, request.getParameter("TITLE"));
                         pstmt.setString(4, request.getParameter("DEPTNAME"));
+                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DEGREEID")));
         
                         int rowCount = pstmt.executeUpdate();
                     
@@ -56,7 +57,7 @@
                     }
             %>
 
-              <%-- -------- UPDATE Code -------- --%>
+             <%-- -------- UPDATE Code -------- --%>
             <%
                     // Check if an update is requested
                     if (action != null && action.equals("update")) {
@@ -68,12 +69,13 @@
                         // UPDATE the major attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "UPDATE Minor SET SSN = ?,SID = ?, TITLE = ?, " +
-                            "DEPTNAME= ? WHERE TITLE = ?");
+                            "DEPTNAME= ?, DEGREEID = ? WHERE TITLE = ?");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(3, request.getParameter("TITLE"));
                         pstmt.setString(4, request.getParameter("DEPTNAME"));
+                        pstmt.setInt(5, request.getParameter("DEGREEID")); 
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -104,7 +106,7 @@
                         conn.setAutoCommit(true);
                     }
             %>
-
+       
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                     // Create the statement
@@ -123,15 +125,17 @@
                         <th>SID</th>
                         <th>TITLE</th>
                         <th>DEPTNAME</th>
+                        <th>DEGREEID</th>
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="minor.jsp" method="get">
+                        <form action="major.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="SSN" size="10"></th>
                             <th><input value="" name="SID" size="10"></th>
                             <th><input value="" name="TITLE" size="10"></th>
                             <th><input value="" name="DEPTNAME" size="10"></th>
+                            <th><input value="" name="DEGREEID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -145,7 +149,7 @@
             %>
 
                     <tr>
-                        <form action="minor.jsp" method="get">
+                        <form action="major.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
                             <%-- Get the SSN, which is a number --%>
@@ -169,6 +173,12 @@
                             <td>
                                 <input value="<%= rs.getString("DEPTNAME") %>" 
                                     name="DEPTNAME" size="10">
+                            </td>
+
+                             <%-- Get the DEGREEID, which is a int --%>
+                            <td>
+                                <input value="<%= rs.getInt("DEGREEID") %>" 
+                                    name="DEGREEID" size="10">
                             </td>
 
                             <%-- Button --%>

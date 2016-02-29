@@ -1,0 +1,10 @@
+127.0.0.1 - - [27/Feb/2016:17:43:02 -0800] "GET /CSE132b/menu.html HTTP/1.1" 200 2846
+127.0.0.1 - - [27/Feb/2016:17:43:03 -0800] "GET /CSE132b/back.jpg HTTP/1.1" 200 303719
+127.0.0.1 - - [27/Feb/2016:17:43:07 -0800] "GET /CSE132b/students.jsp HTTP/1.1" 200 9019
+127.0.0.1 - - [27/Feb/2016:17:48:53 -0800] "GET /CSE132b/students.jsp HTTP/1.1" 200 9019
+127.0.0.1 - - [27/Feb/2016:17:48:56 -0800] "GET /CSE132b/students.jsp?action=delete&SSN=1111 HTTP/1.1" 200 3519
+127.0.0.1 - - [27/Feb/2016:17:49:03 -0800] "GET /CSE132b/thesis_committee.jsp HTTP/1.1" 200 6073
+127.0.0.1 - - [27/Feb/2016:17:49:16 -0800] "GET /CSE132b/sectionstatus.jsp HTTP/1.1" 200 4353
+127.0.0.1 - - [27/Feb/2016:17:49:18 -0800] "GET /CSE132b/section.jsp HTTP/1.1" 200 5015
+127.0.0.1 - - [27/Feb/2016:17:49:47 -0800] "GET /CSE132b/thesis_committee.jsp HTTP/1.1" 200 6073
+127.0.0.1 - - [27/Feb/2016:17:53:34 -0800] "GET /CSE132b/thesis_committee.jsp HTTP/1.1" 200 6073

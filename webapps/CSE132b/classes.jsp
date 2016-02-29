@@ -39,16 +39,14 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO CLASSES VALUES (?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO CLASSES VALUES (?, ?, ?, ?)");
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
                         pstmt.setString(1, request.getParameter("CID"));
                         pstmt.setString(2, request.getParameter("TITLE"));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("QUARTER")));
+                        pstmt.setString(3, request.getParameter("QUARTER"));
                         pstmt.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("REVIEWSESSDATE")));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("REVIEWSESSTIME")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -69,16 +67,13 @@
                         // UPDATE the section attributes in the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "UPDATE Class SET CID = ?, TITLE = ?, QUARTER= ?, " +
-                            "YEAR = ?, REVIEWSESSDATE = ?, REVIEWSESSTIME = ? WHERE TITLE = ?");
+                            "YEAR = ? WHERE TITLE = ?");
 
                         pstmt.setString(1, request.getParameter("CID"));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("QUARTER")));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("YEAR")));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("REVIEWSESSDATE")));
-                        pstmt.setString(5, request.getParameter("REVIEWSESSTIME"));
-                       
-                        pstmt.setInt(
-                            6, Integer.parseInt(request.getParameter("TITLE")));
+                        pstmt.setString(2, request.getParameter("QUARTER"));
+                        pstmt.setInt(3, Integer.parseInt(request.getParameter("YEAR")));         
+                        pstmt.setString(
+                            4, request.getParameter("TITLE"));
                         int rowCount = pstmt.executeUpdate();
                         
                         // Commit transaction
@@ -128,9 +123,6 @@
                         <th>TITLE</th>
                         <th>QUARTER</th>
                         <th>YEAR</th>
-                        <th>REVIEWSESSDATE</th>
-                        <th>REVIEWSESSTIME</th>
-
                         <th>Action</th>
                     </tr>
                     <tr>
@@ -140,8 +132,6 @@
                             <th><input value="" name="TITLE" size="10"></th>
                             <th><input value="" name="QUARTER" size="10"></th>
                             <th><input value="" name="YEAR" size="10"></th>
-                            <th><input value="" name="REVIEWSESSDATE" size="10"></th>
-                            <th><input value="" name="REVIEWSESSTIME" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -171,7 +161,7 @@
 
                             <%-- Get the QUARTER, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("QUARTER") %>" 
+                                <input value="<%= rs.getString("QUARTER") %>" 
                                     name="QUARTER" size="10">
                             </td>
 
@@ -181,18 +171,6 @@
                                     name="YEAR" size="10">
                             </td>
 
-                             <%-- Get the REVIEWSESSDATE, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("REVIEWSESSDATE") %>" 
-                                    name="REVIEWSESSDATE" size="10">
-                            </td>
-
-                            <%-- Get the REVIEWSESSTIME, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("REVIEWSESSTIME") %>" 
-                                    name="REVIEWSESSTIME" size="10">
-                            </td>
-    
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
