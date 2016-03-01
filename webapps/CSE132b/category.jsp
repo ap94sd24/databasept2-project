@@ -44,8 +44,8 @@
                         pstmt.setString(1, request.getParameter("CATEG_ID"));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("MIN_UNITS")));
                         pstmt.setString(3, request.getParameter("POSSIBLE_CLASSID"));
-                        pstmt.setBoolean(4, request.getParameter("IS_CONCENT"));
-                        pstmt.setInt(5, request.getParameter("GPA_MIN"));
+                        pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("IS_CONCENT")));
+                        pstmt.setInt(5, Integer.parseInt(request.getParameter("GPA_MIN")));
                       
                         int rowCount = pstmt.executeUpdate();
 

@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5433/postgres", 
+                        ("jdbc:postgresql://localhost:5432/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -73,7 +73,7 @@
                             "DEGREE_LVL = ?, CONCENTRATION_REQ = ?, DEPTNAME = ?, " + "CATEG_LIST = ? WHERE DEGREEID = ?");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("DEGREEID")));
-                        pstmt.setSInt(2, Integer.parseInt(request.getParameter("TOTAL_UNITS")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("TOTAL_UNITS")));
                         pstmt.setString(3, request.getParameter("DEGREE_NAME"));
                         pstmt.setString(4, request.getParameter("DEGREE_LVL"));
                         pstmt.setString(5, request.getParameter("CONCENTRATION_REQ"));

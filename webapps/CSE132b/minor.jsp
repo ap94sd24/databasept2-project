@@ -75,7 +75,7 @@
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(3, request.getParameter("TITLE"));
                         pstmt.setString(4, request.getParameter("DEPTNAME"));
-                        pstmt.setInt(5, request.getParameter("DEGREEID")); 
+                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DEGREEID"))); 
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
