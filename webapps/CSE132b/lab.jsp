@@ -12,9 +12,8 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
-            <%@ page import="java.util.Date" %>
-            <%@ page import="java.util.Locale" %> 
-             <%@ page import="java.text.SimpleDateFormat" %> 
+            <%@ page import="java.text.DateFormat" %>
+            <%@ page import="java.text.SimpleDateFormat" %>
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -29,14 +28,6 @@
                             "postgres", "cse132b");
 
             %>
-            
-            <%!
-            public static java.sql.Time getCurrentJavaSqlTime(String time) {
-                DATE date = new SimpleDateFormat("HH:mm", Locale.English).parse(time); 
-                return new java.sql.Time(date.getTime());  //To time 
-            }
-             
-            %>
 
             <%-- -------- INSERT Code -------- --%>
             <%
@@ -47,11 +38,6 @@
                         // Begin transaction
                         conn.setAutoCommit(false);
 
-                        SimpleDateFormat reFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        Date activityDate = reformat.parse(request.getParameter("l_DATE"));
-                        java.sql.Date sqlDate = new java.sql.Date(activityDate.getTime());
-                        java.sql.Time timeStart = getCurrentJavaSqlTime((String)request.getParameter("l_TIME_START"));
-                        java.sql.Time timeEnd = getCurrentJavaSqlTime((String)request.getParameter("l_TIME_STOP"));
                         
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Class table.
@@ -61,8 +47,13 @@
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
                         pstmt.setString(1, request.getParameter("LAB_ID"));
-                        pstmt.setDate(2, sqlDate);
+                        Date labDate = java.sql.Date.valueOf(request.getParameter("l_DATE"));
+                        pstmt.setDate(2, labDate);
+
+                        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+                        Time timeStart = new java.sql.Time(formatter.parse(request.getParameter("l_TIME_START")).getTime());
                         pstmt.setTime(3, timeStart); 
+                        Time timeEnd = new java.sql.Time(formatter.parse(request.getParameter("l_TIME_STOP")).getTime());
                         pstmt.setTime(4, timeEnd); 
                         pstmt.setString(5, request.getParameter("l_ROOM")); 
                         pstmt.setString(6, request.getParameter("l_BUILDING")); 
@@ -91,12 +82,17 @@
                             "l_TIME_STOP = ?, l_ROOM = ?, l_BUILDING = ?, l_CAPA = ? WHERE LAB_ID = ?");
 
                         pstmt.setString(1,  request.getParameter("LAB_ID"));
-                        pstmt.setDate(2, sqlDate);
-                        pstmt.setTime(3, timeStart);
-                        pstmt.setTime(4,timeEnd);
-                        pstmt.setString(4, request.getParameter("l_ROOM"));
-                        pstmt.setString(5, request.getParameter("l_BUILDING"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("l_CAPA")));
+                       Date labDate = java.sql.Date.valueOf(request.getParameter("l_DATE"));
+                        pstmt.setDate(2, labDate);
+
+                        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+                        Time timeStart = new java.sql.Time(formatter.parse(request.getParameter("l_TIME_START")).getTime());
+                        pstmt.setTime(3, timeStart); 
+                        Time timeEnd = new java.sql.Time(formatter.parse(request.getParameter("l_TIME_STOP")).getTime());
+                        pstmt.setTime(4, timeEnd); 
+                        pstmt.setString(5, request.getParameter("l_ROOM")); 
+                        pstmt.setString(6, request.getParameter("l_BUILDING")); 
+                        pstmt.setInt(7, Integer.parseInt(request.getParameter("l_CAPA"))); 
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
