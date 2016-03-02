@@ -39,7 +39,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Past_student_enroll VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO PAST_STUDENT_ENROLLMENT VALUES (?, ?, ?, ?, ?, ?, ?)");
 
                         pstmt.setInt( 1, Integer.parseInt(request.getParameter("SID")));
                         pstmt.setString(2, request.getParameter("CID"));
@@ -67,7 +67,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Past_student_enroll SET SID = ?,CID = ?, SECTID = ?, " +
+                            "UPDATE Past_student_enrollment SET SID = ?,CID = ?, SECTID = ?, " +
                             "GRADE = ?, QUARTER = ?, YEAR = ?, CLASS_TKN_ID = ? WHERE SID = ? and CLASS_TKN_ID = ?");
 
                         pstmt.setInt( 1, Integer.parseInt(request.getParameter("SID")));
@@ -96,7 +96,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Past_student_enroll WHERE SID = ? AND CLASS_TKN_ID = ?");
+                            "DELETE FROM Past_student_enrollment WHERE SID = ? AND CLASS_TKN_ID = ?");
 
                         pstmt.setInt(
                             1, Integer.parseInt(request.getParameter("SID")));
@@ -118,7 +118,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Past_student_enroll");
+                        ("SELECT * FROM Past_student_enrollment");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -130,7 +130,6 @@
                         <th>GRADE</th>
                         <th>QUARTER</th>
                         <th>YEAR</th>
-                        <th>CLASS Taken</th>
                                            
                         <th>Action</th>
                     </tr>
@@ -140,9 +139,9 @@
                             <th><input value="" name="SID" size="10"></th>
                             <th><input value="" name="CID" size="15"></th>
                             <th><input value="" name="SECTID" size="15"></th>
-                <th><input value="" name="GRADE" size="15"></th>
+                            <th><input value="" name="GRADE" size="15"></th>
+                            <th><input value="" name="QUARTER" size="15"></th>
                             <th><input value="" name="YEAR" size="15"></th>
-                              <th><input value="" name="CLASS TAKEN" size="15"></th>
 
                             <th><input type="submit" value="Insert"></th>
                         </form>
@@ -197,11 +196,6 @@
                                     name="YEAR" size="15">
                             </td>
 
-                             <%-- Get the CLASS_TKN_ID --%>
-                            <td>
-                                <input value="<%= rs.getString("CLASS_TKN_ID") %>" 
-                                    name="CLASS_TKN_ID" size="15">
-                            </td>
     
                             <%-- Button --%>
                             <td>

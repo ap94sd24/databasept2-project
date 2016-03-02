@@ -88,7 +88,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the section FROM the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM POSS_CLASSES_ID WHERE TITLE = ?");
+                            "DELETE FROM POSSIBLE_CLASSES WHERE TITLE = ?");
 
                         pstmt.setString(
                             1, request.getParameter("TITLE"));
@@ -108,7 +108,7 @@
                     // Use the created statement to SELECT
                     // the class attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM POSS_CLASSES_ID");
+                        ("SELECT * FROM POSSIBLE_CLASSES");
             %>
 
             <!-- Add an HTML table header row to format the results -->

@@ -48,7 +48,7 @@
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("START_YEAR")));
                         pstmt.setString(4, request.getParameter("END_QUARTER"));
                         pstmt.setInt(5, Integer.parseInt(request.getParameter("END_YEAR")));
-                        pstmt.setBoolean(6, request.getParameter("REASON"));
+                        pstmt.setString(6, request.getParameter("REASON"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -76,7 +76,7 @@
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("START_YEAR")));
                         pstmt.setString(4, request.getParameter("END_QUARTER"));
                         pstmt.setInt(5, Integer.parseInt(request.getParameter("END_YEAR")));
-                        pstmt.setBoolean(6, request.getParameter("REASON"));
+                        pstmt.setString(6, request.getParameter("REASON"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -135,10 +135,10 @@
                         <form action="probation.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="SID" size="12"></th>
-                            <th><input value="" name="START_QUARTER" size="35"></th>
-                             <th><input value="" name="START_YEAR" size="35"></th>
-                            <th><input value="" name="END_QUARTER" size="35"></th>
-                             <th><input value="" name="END_YEAR" size="35"></th>
+                            <th><input value="" name="START_QUARTER" size="10"></th>
+                             <th><input value="" name="START_YEAR" size="10"></th>
+                            <th><input value="" name="END_QUARTER" size="10"></th>
+                             <th><input value="" name="END_YEAR" size="10"></th>
                             <th><input value="" name="Reason" size="35"></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>

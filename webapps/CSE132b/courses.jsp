@@ -46,7 +46,9 @@
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(4, request.getParameter("Type"));
                         pstmt.setString(5, request.getParameter("Grade"));
-                        pstmt.setBoolean(6, (request.getParameter("Lab_Req").equals("true")) ? true : false);
+
+                        pstmt.setBoolean(6, Boolean.parseBoolean(request.getParameter("Lab_Req")));
+ 
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -73,7 +75,9 @@
                             1, Integer.parseInt(request.getParameter("Units")));
                         pstmt.setString(2, request.getParameter("Type"));
                         pstmt.setString(3, request.getParameter("Grade"));
-                        pstmt.setBoolean(4, (request.getParameter("Lab_Req").equals("true")) ? true : false);
+ 
+                        pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("Lab_Req")));
+ 
                         pstmt.setString(5, request.getParameter("prereqid"));
                         pstmt.setInt(6, Integer.parseInt(request.getParameter("CID")));
                         int rowCount = pstmt.executeUpdate();
