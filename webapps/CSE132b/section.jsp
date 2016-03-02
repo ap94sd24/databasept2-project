@@ -12,6 +12,9 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
+            <%@ page language="java" import="java.text.*" %>
+            <%@ page import="java.util.*" %>
+
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -39,20 +42,24 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Section VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)");
+                            "INSERT INTO Section VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SECTID")));
 
                         pstmt.setString(2, request.getParameter("TITLE"));
+                        pstmt.setDate(3, java.sql.Date.valueOf(request.getParameter("LECDATE")));
+                        pstmt.setDate(4, java.sql.Date.valueOf(request.getParameter("DISCDATE")));
 
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("LECTIME")));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("LECDATE")));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DISCUSSDATE")));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("DISCUSSTIME")));
+                        pstmt.setString(5, request.getParameter("BUILDING"));
+                        pstmt.setString(6, request.getParameter("ROOM"));
+                        pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
+                        pstmt.setString(8, request.getParameter("LAB_ID"));
+                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("LEC_TIME_START")));
+                        pstmt.setTime(10, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
+                        pstmt.setTime(11, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
+                        pstmt.setTime(12, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
+                        pstmt.setString(13, request.getParameter("REV_ID"));
 
-                        pstmt.setString(7, request.getParameter("BUILDING"));
-                        pstmt.setString(8, request.getParameter("ROOM"));
-                        pstmt.setInt(9, Integer.parseInt(request.getParameter("MAXCAP")));
                         int rowCount = pstmt.executeUpdate();
                     
 
@@ -73,20 +80,24 @@
                         // Create the prepared statement and use it to
                         // UPDATE the section attributes in the Section table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Section SET SECTID = ?, TITLE = ?, LECTIME = ?, " +
-                            "LECDATE = ?, DISCUSSDATE = ?, DISCUSSTIME = ?, BUILDING = ?," +
-                            " ROOM = ?, MAXCAP = ?  WHERE SECTID = ?");
+                            "UPDATE Section SET SECTID = ?, TITLE = ?, LECTDATE = ?, " +
+                            "DISCDATE = ?, BUILDING = ?, ROOM = ?, MAXCAP = ?, LAB_ID = ?, LECT_TIME_START = ?, LECT_TIME_END = ?, DIS_TIME_START = ?, DIS_TIME_END = ?, REV_ID = ?  WHERE SECTID = ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("LECTIME")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("LECDATE")));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("DISCUSSDATE")));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("DISCUSSTIME")));
+                       pstmt.setInt(1, Integer.parseInt(request.getParameter("SECTID")));
+
+                        pstmt.setString(2, request.getParameter("TITLE"));
+                        pstmt.setDate(3, java.sql.Date.valueOf(request.getParameter("LECDATE")));
+                        pstmt.setDate(4, java.sql.Date.valueOf(request.getParameter("DISCDATE")));
+
                         pstmt.setString(5, request.getParameter("BUILDING"));
                         pstmt.setString(6, request.getParameter("ROOM"));
                         pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
-                        pstmt.setInt(
-                            8, Integer.parseInt(request.getParameter("SECTID")));
-                         pstmt.setString(9, request.getParameter("TITLE"));
+                        pstmt.setString(8, request.getParameter("LAB_ID"));
+                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("LEC_TIME_START")));
+                        pstmt.setTime(10, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
+                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
+                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
+                        pstmt.setString(13, request.getParameter("REV_ID"));
                         int rowCount = pstmt.executeUpdate();
                         
                         // Commit transaction
@@ -134,13 +145,17 @@
                     <tr>
                         <th>SECTID</th>
                         <th>TITLE</th>
-                        <th>LECTIME</th>
-                        <th>LECDATE</th>
-                        <th>DISCUSSDATE</th>
-                        <th>DISCUSSTIME</th>
+                        <th>LECTDATE</th>
+                        <th>DISCDATE</th>
                         <th>BUILDING</th>
                         <th>ROOM</th>
                         <th>MAXCAP</th>
+                        <th>LAB ID </th>
+                        <th>LECT_TIME_START</th>
+                        <th>LECT_TIME_END</th>
+                        <th>DIS_TIME_START</th>
+                        <th>DIS_TIME_END</th>
+                        <th>REVIEW ID </th> 
 
                         <th>Action</th>
                     </tr>
@@ -149,13 +164,17 @@
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="SECTID" size="10"></th>
                             <th><input value="" name="TITLE" size="10"></th>
-                            <th><input value="" name="LECTIME" size="10"></th>
-                            <th><input value="" name="LECDATE" size="10"></th>
-                            <th><input value="" name="DISCUSSTIME" size="10"></th>
-                            <th><input value="" name="DISCUSSDATE" size="10"></th>
+                            <th><input value="" name="LECTDATE" size="10"></th>
+                            <th><input value="" name="DISCDATE" size="10"></th>
                             <th><input value="" name="BUILDING" size="10"></th>
                             <th><input value="" name="ROOM" size="10"></th>
                             <th><input value="" name="MAXCAP" size="10"></th>
+                            <th><input value="" name="LAB_ID" size="10"></th>
+                            <th><input value="" name="LECT_TIME_START" size="10"></th>
+                            <th><input value="" name="LECT_TIME_END" size="10"></th>
+                            <th><input value="" name="DIS_TIME_START" size="10"></th>
+                            <th><input value="" name="DIS_TIME_END" size="10"></th>
+                            <th><input value="" name="REV_ID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -183,28 +202,16 @@
                                     name="TITLE" size="10">
                             </td>
 
-                            <%-- Get the LECTIME, which is a number --%>
+                            <%-- Get the LECTDATE, which is a date --%>
                             <td>
-                                <input value="<%= rs.getInt("LECTIME") %>" 
-                                    name="LECTIME" size="10">
+                                <input value="<%= rs.getDate("LECTDATE") %>" 
+                                    name="LECTDATE" size="10">
                             </td>
 
-                             <%-- Get the LECDATE, which is a number --%>
+                             <%-- Get the DISCDATE, which is a date --%>
                             <td>
-                                <input value="<%= rs.getInt("LECDATE") %>" 
-                                    name="LECDATE" size="10">
-                            </td>
-
-                             <%-- Get the DISCUSSDATE, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("DISCUSSDATE") %>" 
-                                    name="DISCUSSDATE" size="10">
-                            </td>
-
-                            <%-- Get the DISCUSSTIME, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("DISCUSSTIME") %>" 
-                                    name="DISCUSSTIME" size="10">
+                                <input value="<%= rs.getDate("DISCDATE") %>" 
+                                    name="DISCDATE" size="10">
                             </td>
     
                             <%-- Get the BUILDING, which is a string --%>
@@ -223,6 +230,44 @@
                                 <input value="<%= rs.getInt("MAXCAP") %>" 
                                     name="MAXCAP" size="10">
                             </td>
+
+                             <%-- Get the lab id, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getString("LAB_ID") %>" 
+                                    name="LAB_ID" size="10">
+                            </td>
+
+                            <%-- Get the lecture start time, which is a time --%>
+                            <td>
+                                <input value="<%= rs.getTime("LECT_TIME_START") %>" 
+                                    name="LECT_TIME_START" size="10">
+                            </td>
+
+                            <%-- Get the lecture end time, which is a time --%>
+                            <td>
+                                <input value="<%= rs.getTime("LECT_TIME_END") %>" 
+                                    name="LECT_TIME_END" size="10">
+                            </td>
+
+                             <%-- Get the discussion start time, which is a time --%>
+                            <td>
+                                <input value="<%= rs.getTime("DIS_TIME_START") %>" 
+                                    name="DIS_TIME_START" size="10">
+                            </td>
+
+                            <%-- Get the discussion end time, which is a time --%>
+                            <td>
+                                <input value="<%= rs.getTime("DIS_TIME_END") %>" 
+                                    name="DIS_TIME_END" size="10">
+                            </td>
+
+                             <%-- Get the review id, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getTime("REV_ID") %>" 
+                                    name="REV_ID" size="10">
+                            </td>
+
+    
     
                             <%-- Button --%>
                             <td>

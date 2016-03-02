@@ -43,7 +43,7 @@
 
                         pstmt.setString(1, request.getParameter("CATEG_ID"));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("MIN_UNITS")));
-                        pstmt.setString(3, request.getParameter("POSSIBLE_CLASSID"));
+                        pstmt.setString(3, request.getParameter("POSSIBLE_CLASSESID"));
                         pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("IS_CONCENT")));
                         pstmt.setInt(5, Integer.parseInt(request.getParameter("GPA_MIN")));
                       
@@ -66,15 +66,13 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Student SET SID = ?,STATUS = ?, FIRSTNAME = ?, " +
-                            "MIDDLENAME = ?, LASTNAME = ? WHERE SID = ?");
+                            "UPDATE CATEGORY SET CATEG_ID = ?, MIN_UNITS = ?, POSSIBLE_CLASSID = ?, IS_CONCENT = ?, GPA_MIN = ? WHERE  CATEG_ID= ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setString(2, request.getParameter("STATUS"));
-                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(4, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(5, request.getParameter("LASTNAME"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(1, request.getParameter("CATEG_ID"));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("MIN_UNITS")));
+                        pstmt.setString(3, request.getParameter("POSSIBLE_CLASSESID"));
+                        pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("IS_CONCENT")));
+                        pstmt.setInt(5, Integer.parseInt(request.getParameter("GPA_MIN")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -94,10 +92,10 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Student WHERE SID = ?");
+                            "DELETE FROM Category WHERE CATEG_ID = ?");
 
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setString(
+                            1, request.getParameter("CATEG_ID"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -114,31 +112,28 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Student");
+                        ("SELECT * FROM Category");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SSN</th>
-                        <th>SID</th>
-                        <th>Status</th>
-                        <th>First</th>
-                      <th>Middle</th>
-                        <th>Last</th>
+                        <th>Category ID</th>
+                        <th>Min Units</th>
+                        <th>Possible Class ID</th>
+                        <th>CONCENTRATION</th>
+                        <th>GPA MIN</th>
                                            
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="students.jsp" method="get">
+                        <form action="category.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SSN" size="10"></th>
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="STATUS" size="15"></th>
-                            <th><input value="" name="FIRSTNAME" size="15"></th>
-                <th><input value="" name="MIDDLENAME" size="15"></th>
-                            <th><input value="" name="LASTNAME" size="15"></th>
-
+                            <th><input value="" name="CATEG_ID" size="10"></th>
+                            <th><input value="" name="MIN_UNITS" size="10"></th>
+                            <th><input value="" name="POSSIBLE_CLASSESID" size="15"></th>
+                            <th><input value="" name="IS_CONCENT" size="15"></th>
+                            <th><input value="" name="GPA_MIN" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -152,54 +147,49 @@
             %>
 
                     <tr>
-                        <form action="students.jsp" method="get">
+                        <form action="category.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SSN, which is a number --%>
+                            <%-- Get the CATEG_ID, which is a string --%>
                             <td>
-                                <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SSN" size="10">
+                                <input value="<%= rs.getString("CATEG_ID") %>" 
+                                    name="CATEG_ID" size="10">
                             </td>
     
-                            <%-- Get the SID --%>
+                            <%-- Get the Min Units --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getInt("MIN_UNITS") %>" 
+                                    name="MIN_UNITS" size="10">
                             </td>
 
                              <%-- Get the COLLEGE --%>
                             <td>
-                                <input value="<%= rs.getString("STATUS") %>" 
-                                    name="STATUS" size="15">
+                                <input value="<%= rs.getString("POSSIBLE_CLASSESID") %>"
+                                    name="POSSIBLE_CLASSESID" size="15">
                             </td>
     
-                            <%-- Get the FIRSTNAME --%>
+                            <%-- Get the IS_CONCENT --%>
                             <td>
-                                <input value="<%= rs.getString("FIRSTNAME") %>"
-                                    name="FIRSTNAME" size="15">
+                                <input value="<%= rs.getBoolean("IS_CONCENT") %>"
+                                    name="IS_CONCENT" size="15">
                             </td>
     
-                            <%-- Get the LASTNAME --%>
+                            <%-- Get the GPA_MIN --%>
                             <td>
-                                <input value="<%= rs.getString("MIDDLENAME") %>" 
-                                    name="MIDDLENAME" size="15">
+                                <input value="<%= rs.getInt("GPA_MIN") %>" 
+                                    name="GPA_MIN" size="15">
                             </td>
-    
-                             <%-- Get the LASTNAME --%>
-                            <td>
-                                <input value="<%= rs.getString("LASTNAME") %>" 
-                                    name="LASTNAME" size="15">
-                            </td>
+
     
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
                             </td>
                         </form>
-                        <form action="students.jsp" method="get">
+                        <form action="category.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("SID") %>" name="SID">
+                                value="<%= rs.getInt("CATEG_ID") %>" name="CATEG_ID">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
