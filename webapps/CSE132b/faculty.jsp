@@ -41,7 +41,7 @@
 
                         pstmt.setString(1, request.getParameter("fname"));
                         pstmt.setString(2, request.getParameter("title"));
-                        pstmt.setString(3, request.getParameter("department"));
+                        pstmt.setString(3, request.getParameter("deptname"));
 
 
                         int rowCount = pstmt.executeUpdate();
@@ -75,7 +75,7 @@
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="fname" size="12" required></th>
                             <th><input value="" name="title" size="35" required></th>
-                            <th><input value="" name="department" size="35" required></th>
+                            <th><input value="" name="deptname" size="35" required></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>
 
@@ -105,8 +105,8 @@
     
                             <%-- Get the department --%>
                             <td>
-                                <input value="<%= rs.getString("department") %>"
-                                    name="department" size="35">
+                                <input value="<%= rs.getString("deptname") %>"
+                                    name="deptname" size="35">
                             </td>
                     </tr>
             <%

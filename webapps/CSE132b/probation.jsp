@@ -41,9 +41,9 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Probation VALUES (?, ?, ?, ?, ?, ?");
+                            "INSERT INTO Probation VALUES (?, ?, ?, ?, ?, ?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(2, request.getParameter("START_QUARTER"));
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("START_YEAR")));
                         pstmt.setString(4, request.getParameter("END_QUARTER"));
@@ -53,59 +53,6 @@
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-             <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Probation SET SID = ?,START_QUARTER = ?, START_YEAR = ?, " +
-                            "END_QUARTER= ?, END_YEAR = ?, REASON = ? WHERE SID = ?, START_QUARTER ?, START_YEAR = ?");
-
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("START_QUARTER"));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("START_YEAR")));
-                        pstmt.setString(4, request.getParameter("END_QUARTER"));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("END_YEAR")));
-                        pstmt.setString(6, request.getParameter("REASON"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Probation WHERE SID = ?, START_QUARTER = ?, START_YEAR = ?");
-
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("START_QUARTER"));
-                        pstmt.setInt(3, Integer.parseInt(request.getParameter("START_YEAR")));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -124,7 +71,7 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
+                        <th>SSN</th>
                         <th>START_QUARTER</th>
                         <th>START_YEAR</th>
                         <th>END_QUARTER</th>
@@ -134,12 +81,12 @@
                     <tr>
                         <form action="probation.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="12"></th>
+                            <th><input value="" name="SSN" size="12"></th>
                             <th><input value="" name="START_QUARTER" size="10"></th>
                              <th><input value="" name="START_YEAR" size="10"></th>
                             <th><input value="" name="END_QUARTER" size="10"></th>
                              <th><input value="" name="END_YEAR" size="10"></th>
-                            <th><input value="" name="Reason" size="35"></th>
+                            <th><input value="" name="REASON" size="35"></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>
 
@@ -155,9 +102,9 @@
                         <form action="probation.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a number --%>
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
+                                <input value="<%= rs.getInt("SSN") %>" 
                                     name="SSN" size="10">
                             </td>
 
@@ -190,20 +137,6 @@
                                 <input value="<%= rs.getString("Reason") %>"
                                     name="Reason" size="35">
                             </td>
-                      <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="probation.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("SID,START_QARTER,START_YEAR") %>" name="PROBATSTUDENT">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

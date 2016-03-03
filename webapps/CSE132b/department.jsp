@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5433/postgres", 
+                        ("jdbc:postgresql://localhost:5432/postgres", 
                             "postgres", "cse132b");
 
             %>

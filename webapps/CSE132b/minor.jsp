@@ -39,15 +39,11 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Minor VALUES (?, ?, ?, ?,?)");
+                            "INSERT INTO MINOR VALUES (?, ?, ?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
-
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SID")));
-
-                        pstmt.setString(3, request.getParameter("TITLE"));
-                        pstmt.setString(4, request.getParameter("DEPTNAME"));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DEGREEID")));
+                        pstmt.setString(1, request.getParameter("MINOR_TITLE"));
+                        pstmt.setString(2, request.getParameter("DEPTNAME"));
+                        pstmt.setInt(3, Integer.parseInt(request.getParameter("DEGREEID")));
         
                         int rowCount = pstmt.executeUpdate();
                     
@@ -57,56 +53,7 @@
                     }
             %>
 
-             <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the major attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Minor SET SSN = ?,SID = ?, TITLE = ?, " +
-                            "DEPTNAME= ?, DEGREEID = ? WHERE TITLE = ?");
-
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setString(3, request.getParameter("TITLE"));
-                        pstmt.setString(4, request.getParameter("DEPTNAME"));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DEGREEID"))); 
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-              <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Minor WHERE TITLE= ?");
-
-                        pstmt.setString(
-                            1, request.getParameter("TITLE"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-       
+        
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                     // Create the statement
@@ -115,25 +62,21 @@
                     // Use the created statement to SELECT
                     // the section attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Minor");
+                        ("SELECT * FROM MINOR");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SSN</th>
-                        <th>SID</th>
-                        <th>TITLE</th>
+                        <th>MINOR TITLE</th>
                         <th>DEPTNAME</th>
                         <th>DEGREEID</th>
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="major.jsp" method="get">
+                        <form action="minor.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SSN" size="10"></th>
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="TITLE" size="10"></th>
+                            <th><input value="" name="MINOR_TITLE" size="10"></th>
                             <th><input value="" name="DEPTNAME" size="10"></th>
                             <th><input value="" name="DEGREEID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -149,24 +92,13 @@
             %>
 
                     <tr>
-                        <form action="major.jsp" method="get">
+                        <form action="minor.jsp" method="get">
                             <input type="hidden" value="update" name="action">
-
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SSN" size="10">
-                            </td>
-                             <%-- Get the SID, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("SID") %>" 
-                                    name="SID" size="10">
-                            </td>
 
                             <%-- Get the TITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("TITLE") %>" 
-                                    name="TITLE" size="10">
+                                <input value="<%= rs.getString("MINOR_TITLE") %>" 
+                                    name="MINOR_TITLE" size="10">
                             </td>
 
                              <%-- Get the DEPTNAME, which is a string --%>
@@ -177,24 +109,9 @@
 
                              <%-- Get the DEGREEID, which is a int --%>
                             <td>
-                                <input value="<%= rs.getInt("DEGREEID") %>" 
+                                <input value="<%= rs.getInt("DEGREE_ID") %>" 
                                     name="DEGREEID" size="10">
                             </td>
-
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="minor.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getString("TITLE") %>" name="TITLE">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

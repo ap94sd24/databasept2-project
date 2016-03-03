@@ -41,12 +41,12 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO PREV_DEGREE VALUES (?, ?, ?, ?)");
 
-                       // pstmt.setString(1, request.getParameter("SID"));
+                       // pstmt.setString(1, request.getParameter("SSN"));
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("DEGREEID")));
-                        pstmt.setString(3, request.getParameter("INSTITUTION"));
-                        pstmt.setString(4, request.getParameter("DEGREETYPE"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(2, request.getParameter("INSTITUTION"));
+                        pstmt.setString(3, request.getParameter("DEGREETYPE"));
+                        pstmt.setString(4, request.getParameter("DEGREENAME"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -69,20 +69,20 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
-                        <th>DEGREEID</th>
+                        <th>SSN</th>
                         <th>INSTITUTION</th>
-                        <th>DEGREETYPE</th>
+                        <th>DEGREE TYPE</th>
+                        <th>DEGREE NAME</th>
                        
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="prev_degree.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="DEGREEID" size="10"></th>
+                            <th><input value="" name="SSN" size="10"></th>
                             <th><input value="" name="INSTITUTION" size="10"></th>
                             <th><input value="" name="DEGREETYPE" size="10"></th>
+                            <th><input value="" name="DEGREENAME" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -99,15 +99,10 @@
                         <form action="prev_degree.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a integer --%>
+                            <%-- Get the SSN, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
-                            </td>
-                             <%-- Get the DEGREEID, which is a integer --%>
-                            <td>
-                                <input value="<%= rs.getInt("DEGREEID") %>" 
-                                    name="DEGREEID" size="10">
+                                <input value="<%= rs.getInt("SSN") %>" 
+                                    name="SSN" size="10">
                             </td>
 
                             <%-- Get the INSITUTION, which is a string --%>
@@ -122,21 +117,12 @@
                                     name="DEGREETYPE" size="10">
                             </td>
 
-    
-                            <%-- Button --%>
+                            <%-- Get the DEGREETYPE, which is a string --%>
                             <td>
-                                <input type="submit" value="Update">
+                                <input value="<%= rs.getString("DEGREENAME") %>" 
+                                    name="DEGREENAME" size="10">
                             </td>
-                        </form>
-                        <form action="prev_degree.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("DEGREEID") %>" name="PREV DEGREE">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
+
                     </tr>
             <%
                     }

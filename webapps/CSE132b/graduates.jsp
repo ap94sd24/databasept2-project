@@ -43,68 +43,15 @@
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(2, request.getParameter("TYPE"));     
                         pstmt.setString(3, request.getParameter("CONCENTRATION"));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("DEGREEID")));
+                        pstmt.setInt(4, Integer.parseInt(request.getParameter("DEGREE_ID")));
                         int rowCount = pstmt.executeUpdate();
                     
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-               <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Graduates SET SID = ?, TYPE = ?, CONCENTRATION = ?, " +
-                            "DEGREEID= ? WHERE SID = ? and TYPE = ?");
- 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("TYPE"));     
-                        pstmt.setString(3, request.getParameter("CONCENTRATION"));
-                        pstmt.setInt(4, Integer.parseInt(request.getParameter("DEGREEID"))); 
-
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Undergraduates WHERE SID = ? and TYPE = ?");
-
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
-                        
-                        pstmt.setString(2, request.getParameter("TYPE"));
-                        int rowCount = pstmt.executeUpdate();
-                       
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -123,20 +70,20 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
+                        <th>SSN</th>
                         <th> TYPE </th> 
                         <th> CONCENTRATION </th>
-                        <th> DEGREEID </th> 
+                        <th> DEGREE_ID </th> 
 
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="graduates.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>
+                            <th><input value="" name="SSN" size="10"></th>
                             <th><input value="" name="TYPE" size="10"></th>
                             <th><input value="" name="CONCENTRATION" size="10"></th>
-                            <th><input value="" name="DEGREEID" size="10"></th>
+                            <th><input value="" name="DEGREE_ID" size="10"></th>
                            
                             <th><input type="submit" value="Insert"></th>
                         </form>
@@ -154,10 +101,10 @@
                         <form action="graduates.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a integer --%>
+                            <%-- Get the SSN, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getInt("SSN") %>" 
+                                    name="SSN" size="10">
                             </td>
                               <%-- Get the TYPE, which is a string --%>
                             <td>
@@ -173,24 +120,10 @@
 
                              <%-- Get the DEGREEID, which is a int --%>
                             <td>
-                                <input value="<%= rs.getInt("DEGREEID") %>" 
-                                    name="DEGREEID" size="10">
+                                <input value="<%= rs.getInt("DEGREE_ID") %>" 
+                                    name="DEGREE_ID" size="10">
                             </td>
                              
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="graduates.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("SID,TYPE") %>" name="GRADUATES">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

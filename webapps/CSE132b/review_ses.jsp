@@ -15,11 +15,7 @@
             <%@ page language="java" import="java.text.*" %>
             <%@ page import="java.util.*" %>
 
-            <%!
-            public static java.sql.Time getCurrentJavaSqlTime(String time) {
-                DATE date = new SimpleDateFormat("HH:mm", Locale.English).parse(time); 
-                return new java.sql.Time(date.getTime());  //To time 
-            }
+
            
     
             <%-- -------- Open Connection Code -------- --%>
@@ -46,87 +42,17 @@
                         conn.setAutoCommit(false);                       // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
 
-                        SimpleDateFormat reFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        Date startDate = reformat.parse(request.getParameter("R_DATE_START"));
-                        java.sql.Date sqlDateStart = new java.sql.Date(startDate.getTime());
-                        Date endDate = reformat.parse(request.getParameter("R_DATE_END"));
-                        java.sql.Date sqlDateEnd = new java.sql.Date(startDate.getTime()); 
-                        java.sql.Time tStart = getCurrentJavaSqlTime((String)request.getParameter("R_TIME_START"));
-                        java.sql.Time tEnd = getCurrentJavaSqlTime((String)request.getParameter("R_TIME_END"));
 
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?,?,?)");
-                        pstmt.setString(1, request.getParameter("REV_ID"));     
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setDate(3, sqlDateStart);
-                        pstmt.setDate(4, sqlDateEnd);
-                        pstmt.setTime(5, tStart);
-                        pstmt.setTime(6,tEnd);
-
+                            "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("rev_id")));     
+                        pstmt.setString(2, request.getParameter("R_DATE"));
+                        pstmt.setTime(3, java.sql.Time.valueOf(request.getParameter("R_TIME_START")));
+                        pstmt.setTime(4, java.sql.Time.valueOf(request.getParameter("R_TIME_END")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-             <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-
-                        SimpleDateFormat reFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        Date startDate = reformat.parse(request.getParameter("R_DATE_START"));
-                        java.sql.Date sqlDateStart = new java.sql.Date(startDate.getTime());
-                        Date endDate = reformat.parse(request.getParameter("R_DATE_END"));
-                        java.sql.Date sqlDateEnd = new java.sql.Date(startDate.getTime()); 
-                        java.sql.Time tStart = getCurrentJavaSqlTime((String)request.getParameter("R_TIME_START"));
-                        java.sql.Time tEnd = getCurrentJavaSqlTime((String)request.getParameter("R_TIME_END"));
-
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Review_ses SET REV_ID = ?, SECTIONID = ?, R_DATE_START = ?, " +
-                            "R_DATE_END = ?, R_TIME_START = ?, R_TIME_END WHERE REV_ID = ?");
-
-                        pstmt.setString(1, request.getParameter("REV_ID"));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTIONID")));
-                        pstmt.setDate(3, sqlDateStart);
-                        pstmt.setDate(4, sqlDateEnd);
-                        pstmt.setTime(5, tStart);
-                        pstmt.setTime(6,tEnd);
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Review_ses WHERE REV_ID = ?");
-
-                        pstmt.setString(
-                            1, request.getParameter("REV_ID"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -146,22 +72,20 @@
                 <table border="1">
                     <tr>
                        <th>Review Sess ID</th>
-                        <th>Section ID</th>
-                        <th>Date Start</th>
-                        <th>Date End</th>
+                        <th>Review Date</th>
                         <th>Time Start</th>
                        <th>Time End</th>
+                       <th>Action</th>
                     </tr>
                     <tr>
                         <form action="review_ses.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="rev_id" size="12"></th>
-                            <th><input value="" name="sectionid" size="12"></th>
-                            <th><input value="" name="R_DATE_START" size="35"></th>
-                            <th><input value="" name="R_DATE_END" size="12"></th>
-                            <th><input value="" name="R_TIME_START" size="35"></th>
-                            <th><input value="" name="R_TIME_END" size="35"></th>
+                            <th><input value="" name="R_DATE" size="12"></th>
+                            <th><input value="" name="R_TIME_START" size="12"></th>
+                            <th><input value="" name="R_TIME_END" size="12"></th>
                             <th><input type="submit" value="Insert"></th>
+                        </form>
                     </tr>
 
             <%-- -------- Iteration Code -------- --%>
@@ -174,58 +98,29 @@
 
                     <tr>
                         <form action="review_ses.jsp" method="get">
-                            <input type="hidden" value="update" name="action">
-
                             <%-- Get the review_sess id, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("rev_id") %>" 
+                                <input value="<%= rs.getInt("rev_id") %>" 
                                     name="rev_id" size="10">
                             </td>
-
-                            <%-- Get the sectionid, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("sectionid") %>" 
-                                    name="sectionid" size="10">
-                            </td>
     
-                            <%-- Get the R_DATE_START --%>
+                            <%-- Get the R_DATE --%>
                             <td>
-                                <input value="<%= rs.getInt("R_DATE_START") %>" 
-                                    name="R_DATE_START" size="35">
+                                <input value="<%= rs.getString("R_DATE") %>" 
+                                    name="R_DATE" size="35">
                             </td>
 
-                            <%-- Get the R_DATE_END --%>
-                            <td>
-                                <input value="<%= rs.getInt("R_DATE_END") %>" 
-                                    name="R_DATE_END" size="35">
-                            </td>
-                            
                              <%-- Get the R_TIME_START --%>
                             <td>
-                                <input value="<%= rs.getInt("R_TIME_START") %>" 
+                                <input value="<%= rs.getTime("R_TIME_START") %>" 
                                     name="R_TIME_START" size="35">
                             </td>
 
                             <%-- Get the R_TIME_END --%>
                             <td>
-                                <input value="<%= rs.getInt("R_TIME_END") %>"
+                                <input value="<%= rs.getTime("R_TIME_END") %>"
                                     name="R_TIME_END" size="35">
                             </td>
-                        
-                      <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="review_ses.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getString("REV_ID") %>" name="REV_ID">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

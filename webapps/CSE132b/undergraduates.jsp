@@ -43,68 +43,15 @@
 
                        // pstmt.setString(1, request.getParameter("TITLE"));
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(2, request.getParameter("COLLEGE")); 
-                        pstmt.setString(3, request.getParameter("MTITLE"));  
-                        pstmt.setString(4, request.getParameter("TITLE"));         
+                        pstmt.setString(3, request.getParameter("MAJOR_TITLE"));  
+                        pstmt.setString(4, request.getParameter("MINOR_TITLE"));         
                         int rowCount = pstmt.executeUpdate();
                     
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-               <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Undergraduates SET SID = ?, COLLEGE = ?, MTITLE = ?, " +
-                            "TITLE= ? WHERE SID = ? and COLLEGE = ?");
- 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("COLLEGE")); 
-                        pstmt.setString(3, request.getParameter("MTITLE"));  
-                        pstmt.setString(4, request.getParameter("TITLE"));   
-
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Undergraduates WHERE SID = ? and COLLEGE = ?");
-
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
-                        
-                        pstmt.setString(2, request.getParameter("COLLEGE"));
-                        int rowCount = pstmt.executeUpdate();
-                       
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -123,10 +70,10 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
+                        <th>SSN</th>
                         <th> COLLEGE </th> 
-                        <th>MTITLE </th>
-                        <th> TITLE </th>
+                        <th>Major </th>
+                        <th> Minor </th>
 
 
                         <th>Action</th>
@@ -134,10 +81,10 @@
                     <tr>
                         <form action="undergraduates.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>
+                            <th><input value="" name="SSN" size="10"></th>
                             <th><input value="" name="COLLEGE" size="10"></th>
-                            <th><input value="" name="MTITLE" size="10"></th>
-                            <th><input value="" name="TITLE" size="10"></th>
+                            <th><input value="" name="MAJOR_TITLE" size="10"></th>
+                            <th><input value="" name="MINOR_TITLE" size="10"></th>
 
                            
                             <th><input type="submit" value="Insert"></th>
@@ -156,10 +103,10 @@
                         <form action="undergraduates.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a integer --%>
+                            <%-- Get the SSN, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getInt("SSN") %>" 
+                                    name="SSN" size="10">
                             </td>
                               <%-- Get the COLLEGE, which is a string --%>
                             <td>
@@ -169,30 +116,16 @@
 
                              <%-- Get the MTITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("MTITLE") %>" 
-                                    name="MAJOR" size="10">
+                                <input value="<%= rs.getString("MAJOR_TITLE") %>" 
+                                    name="MAJOR_TITLE" size="10">
                             </td>
 
                               <%-- Get the TITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("TITLE") %>" 
-                                    name="Minor" size="10">
+                                <input value="<%= rs.getString("MINOR_TITLE") %>" 
+                                    name="MINOR_TITLE" size="10">
                             </td>
                              
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="undergraduates.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("SID,COLLEGE") %>" name="UNDERGRADUATES">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

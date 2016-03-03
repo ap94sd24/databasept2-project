@@ -39,66 +39,13 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Past_student_enrollment VALUES (?, ?)");
+                            "INSERT INTO curr_student_enrollment VALUES (?)");
 
-                        pstmt.setInt( 1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setInt( 2, Integer.parseInt(request.getParameter("SECTID")));
-                    
+                        pstmt.setInt( 1, Integer.parseInt(request.getParameter("SSN")));                    
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Curr_student_enrollment SET SID = ?,  SECTID = ?, " +
-                            " WHERE SID = ? and SECTID = ?");
-
-                        pstmt.setInt( 1, Integer.parseInt(request.getParameter("SID")));
-                  
-                        pstmt.setInt( 2, Integer.parseInt(request.getParameter("SECTID")));
-                     
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Curr_student_enrollment WHERE SID = ? AND SECTID = ?");
-
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
-                         pstmt.setInt(
-                            2, Integer.parseInt(request.getParameter("SECTID")));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -117,17 +64,13 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
-                      
-                        <th>SECTID</th>
-                                             
+                        <th>SSN</th>
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="curr_student_enroll.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>                         
-                            <th><input value="" name="SECTID" size="15"></th>
+                            <th><input value="" name="SSN" size="10"></th>                         
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -141,37 +84,15 @@
             %>
 
                     <tr>
-                        <form action="past_student_enroll.jsp" method="get">
+                        <form action="curr_student_enroll.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
     
                             <%-- Get the SID --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getInt("SSN") %>" 
+                                    name="SSN" size="10">
                             </td>
-    
-                            <%-- Get the SECTION ID --%>
-                            <td>
-                                <input value="<%= rs.getInt("SECTID") %>"
-                                    name="SECTID" size="15">
-                            </td>
-    
-    
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="past_student_enroll.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("SID, SECTID") %>" name="CURR ENROLLMENTID">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

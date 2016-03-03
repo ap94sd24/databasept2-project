@@ -44,44 +44,22 @@
 
 
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO review_ses VALUES (?, ?, ?, ?, ?, ?, ?)");
-                        pstmt.setString(1, request.getParameter("LAB_ID"));  
-                        pstmt.setDate(2, java.sql.Date.valueOf(request.getParameter("l_DATE")));   
-                        pstmt.setTime(3, java.sql.Time.valueOf(request.getParameter("l_TIME_START")));
-                        pstmt.setTime(4, java.sql.Time.valueOf(request.getParameter("l_TIME_STOP")));
-                        pstmt.setString(5, request.getParameter("BUILDING"));
-                        pstmt.setString(6, request.getParameter("ROOM"));
-                        pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
+                            "INSERT INTO LABS VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("LAB_ID")));  
+                        pstmt.setString(2, request.getParameter("LAB_DATE"));   
+                        pstmt.setTime(3, java.sql.Time.valueOf(request.getParameter("L_TIME_START")));
+                        pstmt.setTime(4, java.sql.Time.valueOf(request.getParameter("L_TIME_STOP")));
+                        pstmt.setString(5, request.getParameter("L_ROOM"));
+                        pstmt.setString(6, request.getParameter("L_BUILDING"));
+                        pstmt.setInt(7, Integer.parseInt(request.getParameter("L_CAPA")));
+                        pstmt.setString(8, request.getParameter("QUARTER"));
+                        pstmt.setInt(9, Integer.parseInt(request.getParameter("L_CAPA")));
+
 
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM LABS WHERE LAB_ID = ?");
-
-                        pstmt.setString(
-                            1, request.getParameter("LAB_ID"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -107,19 +85,23 @@
                         <th>Lab Room</th>
                        <th> Lab Building</th>
                        <th> Lab Capacity</th>
+                       <th>Quarter</th>
+                       <th>Year</th>   
 
                        <th>Action</th>
                     </tr>
                     <tr>
                         <form action="labs.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="lAB_ID" size="12"></th>
-                            <th><input value="" name="l_DATE" size="12"></th>
-                            <th><input value="" name="l_TIME_START" size="35"></th>
-                            <th><input value="" name="l_TIME_STOP" size="12"></th>
-                            <th><input value="" name="l_ROOM" size="35"></th>
-                            <th><input value="" name="l_BUILDING" size="35"></th>
-                            <th><input value="" name="l_CAPA" size="35"></th>
+                            <th><input value="" name="LAB_ID" size="5"></th>
+                            <th><input value="" name="LAB_DATE" size="12"></th>
+                            <th><input value="" name="L_TIME_START" size="32"></th>
+                            <th><input value="" name="L_TIME_STOP" size="12"></th>
+                            <th><input value="" name="L_ROOM" size="10"></th>
+                            <th><input value="" name="L_BUILDING" size="10"></th>
+                            <th><input value="" name="L_CAPA" size="5"></th>
+                            <th><input value="" name="QUARTER" size="10"></th>
+                            <th><input value="" name="YEAR" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -144,54 +126,52 @@
 
                             <%-- Get the lab date, which is a date --%>
                             <td>
-                                <input value="<%= rs.getDate("l_DATE") %>" 
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getString("LAB_DATE") %>" 
+                                    name="LAB_DATE" size="10">
                             </td>
     
                             <%-- Get the l_TIME_START --%>
                             <td>
-                                <input value="<%= rs.getTime("l_TIME_START") %>" 
-                                    name="l_TIME_START" size="35">
+                                <input value="<%= rs.getTime("L_TIME_START") %>" 
+                                    name="L_TIME_START" size="35">
                             </td>
 
                              <%-- Get the l_TIME_START --%>
                             <td>
-                                <input value="<%= rs.getTime("l_TIME_STOP") %>" 
-                                    name="l_TIME_STOP" size="35">
+                                <input value="<%= rs.getTime("L_TIME_STOP") %>" 
+                                    name="L_TIME_STOP" size="35">
                             </td>
 
                             <%-- Get the lab room --%>
                             <td>
-                                <input value="<%= rs.getString("l_ROOM") %>" 
-                                    name="l_ROOM" size="35">
+                                <input value="<%= rs.getString("L_ROOM") %>" 
+                                    name="L_ROOM" size="35">
                             </td>
                             
                              <%-- Get the lab building --%>
                             <td>
-                                <input value="<%= rs.getString("l_BUILDING") %>" 
-                                    name="l_BUILDING" size="35">
+                                <input value="<%= rs.getString("L_BUILDING") %>" 
+                                    name="L_BUILDING" size="35">
                             </td>
 
                             <%-- Get the l_CAPA --%>
                             <td>
-                                <input value="<%= rs.getInt("l_CAPA") %>"
-                                    name="l_CAPA" size="35">
+                                <input value="<%= rs.getInt("L_CAPA") %>"
+                                    name="L_CAPA" size="35">
                             </td>
-                        
-                      <%-- Button --%>
+
+                             <%-- Get the lab building --%>
                             <td>
-                                <input type="submit" value="Update">
+                                <input value="<%= rs.getString("QUARTER") %>" 
+                                    name="QUARTER" size="35">
                             </td>
-                        </form>
-                        <form action="labs.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getString("lab_ID") %>" name="LAB_ID">
-                            <%-- Button --%>
+                            
+                            <%-- Get the l_CAPA --%>
                             <td>
-                                <input type="submit" value="Delete">
+                                <input value="<%= rs.getInt("YEAR") %>"
+                                    name="YEAR" size="35">
                             </td>
-                        </form>
+
                     </tr>
             <%
                     }

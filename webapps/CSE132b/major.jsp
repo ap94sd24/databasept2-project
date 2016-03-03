@@ -39,70 +39,16 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Major VALUES (?, ?, ?, ?,?)");
+                            "INSERT INTO Major VALUES (?, ?, ?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
-
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SID")));
-
-                        pstmt.setString(3, request.getParameter("MTITLE"));
-                        pstmt.setString(4, request.getParameter("DEPTNAME"));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DEGREEID")));
+                        pstmt.setString(1, request.getParameter("MAJOR_TITLE"));
+                        pstmt.setString(2, request.getParameter("DEPTNAME"));
+                        pstmt.setInt(3, Integer.parseInt(request.getParameter("DEGREEID")));
         
                         int rowCount = pstmt.executeUpdate();
                     
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-             <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the major attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Major SET SSN = ?,SID = ?, MTITLE = ?, " +
-                            "DEPTNAME= ?, DEGREEID = ? WHERE TITLE = ?");
-
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setString(3, request.getParameter("MTITLE"));
-                        pstmt.setString(4, request.getParameter("DEPTNAME"));
-                        pstmt.setInt(5, Integer.parseInt(request.getParameter("DEGREEID"))); 
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-              <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Major WHERE MTITLE= ?");
-
-                        pstmt.setString(
-                            1, request.getParameter("MTITLE"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -121,9 +67,7 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SSN</th>
-                        <th>SID</th>
-                        <th>TITLE</th>
+                        <th>MAJOR TITLE</th>
                         <th>DEPTNAME</th>
                         <th>DEGREEID</th>
                         <th>Action</th>
@@ -131,9 +75,7 @@
                     <tr>
                         <form action="major.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SSN" size="10"></th>
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="MTITLE" size="10"></th>
+                            <th><input value="" name="MAJOR_TITLE" size="10"></th>
                             <th><input value="" name="DEPTNAME" size="10"></th>
                             <th><input value="" name="DEGREEID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -152,21 +94,10 @@
                         <form action="major.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SSN" size="10">
-                            </td>
-                             <%-- Get the SID, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("SID") %>" 
-                                    name="SID" size="10">
-                            </td>
-
                             <%-- Get the TITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("MTITLE") %>" 
-                                    name="MTITLE" size="10">
+                                <input value="<%= rs.getString("MAJOR_TITLE") %>" 
+                                    name="MAJOR_TITLE" size="10">
                             </td>
 
                              <%-- Get the DEPTNAME, which is a string --%>
@@ -177,24 +108,10 @@
 
                              <%-- Get the DEGREEID, which is a int --%>
                             <td>
-                                <input value="<%= rs.getInt("DEGREEID") %>" 
+                                <input value="<%= rs.getInt("DEGREE_ID") %>" 
                                     name="DEGREEID" size="10">
                             </td>
 
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="major.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getString("MTITLE") %>" name="MTITLE">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

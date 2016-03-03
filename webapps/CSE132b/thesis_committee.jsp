@@ -39,7 +39,7 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO thesis_committee VALUES (?, ?, ?,?,?,?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("TCID")));
                         pstmt.setString(3, request.getParameter("p1"));
                         pstmt.setString(4, request.getParameter("p2"));
@@ -69,7 +69,7 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
+                        <th>SSN</th>
                         <th>Thesis Committee ID</th>
                         <th>Professor 1</th>
                         <th>Professor 2</th>
@@ -79,7 +79,7 @@
                     <tr>
                         <form action="thesis_committee.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="12" required></th>
+                            <th><input value="" name="SSN" size="12" required></th>
                             <th><input value="" name="TCID" size="12" required></th>
                             <th><input value="" name="p1" size="35" required></th>
                             <th><input value="" name="p2" size="35" required></th>
@@ -100,10 +100,10 @@
                         <form action="thesis_committee.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a number --%>
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getInt("SSN") %>" 
+                                    name="SSN" size="10">
                             </td>
 
                              <%-- Get the TCID, which is a number --%>
