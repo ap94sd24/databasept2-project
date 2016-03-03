@@ -39,18 +39,70 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Class table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO CLASSES VALUES (?, ?, ?, ?)");
+                            "INSERT INTO Register VALUES (?, ?, ?, ?)");
 
                        // pstmt.setString(1, request.getParameter("SID"));
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTID")));
-                        pstmt.setString(3, request.getParameter("ATTENDANCE"));
-                        pstmt.setString(4, request.getParameter("PASTQUARTER"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECT_ID")));
+                        pstmt.setString(3, request.getParameter("GRADE_OPT"));
+                        pstmt.setInt(4, Integer.parseInt(request.getParameter("UNITS")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+             <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the student attributes in the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Register SET SSN = ?,SECT_ID = ?, GRADE_OPT = ?, " +
+                            "UNITS= ? WHERE SSN = ? AND SECT_ID = ?");
+
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECT_ID")));
+                        pstmt.setString(3, request.getParameter("GRADE_OPT"));
+                        pstmt.setInt(4, Integer.parseInt(request.getParameter("UNITS")));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the student FROM the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Register WHERE SSN = ? AND SECT_ID = ?");
+
+                        pstmt.setInt(
+                            1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setInt(
+                            1, Integer.parseInt(request.getParameter("SECT_ID")));
+
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -69,20 +121,20 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
-                        <th>SECTID</th>
-                        <th>ATTENDANCE</th>
-                        <th>PASTQUARTER</th>
+                        <th>SSN</th>
+                        <th>SECTION ID</th>
+                        <th>GRADE OPTION</th>
+                        <th>UNITS</th>
                        
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="register.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="SECTID" size="10"></th>
-                            <th><input value="" name="ATTENDANCE" size="10"></th>
-                            <th><input value="" name="PASTQUARTER" size="10"></th>
+                            <th><input value="" name="SSN" size="10"></th>
+                            <th><input value="" name="SECT_ID" size="10"></th>
+                            <th><input value="" name="GRADE_OPT" size="10"></th>
+                            <th><input value="" name="UNITS" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -99,27 +151,27 @@
                         <form action="register.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a integer --%>
+                            <%-- Get the SSN, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
+                                <input value="<%= rs.getInt("SSN") %>" 
                                     name="SID" size="10">
                             </td>
                              <%-- Get the SECTID, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("SECTID") %>" 
-                                    name="SECTID" size="10">
+                                <input value="<%= rs.getInt("SECT_ID") %>" 
+                                    name="SECT_ID" size="10">
                             </td>
 
-                            <%-- Get the ATTENDANCE, which is a string --%>
+                            <%-- Get the GRADE OPTION, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("ATTENDANCE") %>" 
-                                    name="ATTENDANCE" size="10">
+                                <input value="<%= rs.getString("GRADE_OPT") %>" 
+                                    name="GRADE OPTION" size="10">
                             </td>
 
-                             <%-- Get the PASTQUARTER, which is a string --%>
+                             <%-- Get the UNITS, which is a int --%>
                             <td>
-                                <input value="<%= rs.getString("PASTQUARTER") %>" 
-                                    name="PASTQUARTER" size="10">
+                                <input value="<%= rs.getInt("UNITS") %>" 
+                                    name="UNITS" size="10">
                             </td>
 
     
@@ -131,7 +183,7 @@
                         <form action="register.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getString("SID,SECTID") %>" name="REGISTER">
+                                value="<%= rs.getString("SSN,SECT_ID") %>" name="REGISTER">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

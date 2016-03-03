@@ -29,7 +29,6 @@
                     Connection conn = DriverManager.getConnection
                         ("jdbc:postgresql://localhost:5432/postgres", 
                             "postgres", "cse132b");
-
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -37,12 +36,10 @@
                     String action = request.getParameter("action");
                     // Check if an insertion is requested
                     if (action != null && action.equals("insert")) {
-
                         // Begin transaction
                         conn.setAutoCommit(false);                       // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
-
-
+ 
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO review_ses VALUES (?, ?, ?, ?)");
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("rev_id")));     
@@ -50,7 +47,6 @@
                         pstmt.setTime(3, java.sql.Time.valueOf(request.getParameter("R_TIME_START")));
                         pstmt.setTime(4, java.sql.Time.valueOf(request.getParameter("R_TIME_END")));
                         int rowCount = pstmt.executeUpdate();
-
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
@@ -61,7 +57,6 @@
             <%
                     // Create the statement
                     Statement statement = conn.createStatement();
-
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
