@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -41,8 +41,7 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO Student VALUES (?, ?, ?, ?, ?, ?)");
 
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("SID")));
                         pstmt.setString(3, request.getParameter("STATUS"));
                         pstmt.setString(4, request.getParameter("FIRSTNAME"));

@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -47,7 +47,7 @@
                         pstmt.setString(4, request.getParameter("DEGREE_LVL"));
                         pstmt.setString(5, request.getParameter("CONCENTRATION_REQ"));
                         pstmt.setString(6, request.getParameter("DEPTNAME"));
-                        pstmt.setString(7, request.getParameter("CATEG_LIST"));
+                        pstmt.setInt(7, Integer.parseInt(request.getParameter("CATEG_DEGREE_ID")));
                 
 
                         int rowCount = pstmt.executeUpdate();
@@ -70,7 +70,7 @@
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "UPDATE Degree SET DEGREEID= ?, TOTAL_UNITS = ?, " +  "DEGREE_NAME = ?, " + 
-                            "DEGREE_LVL = ?, CONCENTRATION_REQ = ?, DEPTNAME = ?, " + "CATEG_LIST = ? WHERE DEGREEID = ?");
+                            "DEGREE_LVL = ?, CONCENTRATION_REQ = ?, DEPTNAME = ?, " + "CATEG_DEGREE_ID = ? WHERE DEGREEID = ?");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("DEGREEID")));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("TOTAL_UNITS")));
@@ -78,7 +78,7 @@
                         pstmt.setString(4, request.getParameter("DEGREE_LVL"));
                         pstmt.setString(5, request.getParameter("CONCENTRATION_REQ"));
                         pstmt.setString(6, request.getParameter("DEPTNAME"));
-                        pstmt.setString(7,request.getParameter("CATEG_LIST"));
+                        pstmt.setString(7,request.getParameter("CATEG_DEGREE_ID"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -105,9 +105,9 @@
                         <th>Total Units</th>
                         <th>Degree Name</th>
                         <th>Degree Level</th>
-                        <th>Concentration Req.</th>
-                        <th>Dept Name</th>
-                        <th>Catagory List</th>
+                        <th>Concentration(if MS/PhD)</th>
+                        <th>Department Name</th>
+                        <th>Catagory List ID</th>
                     </tr>
                     <tr>
                         <form action="degree.jsp" method="get">
@@ -118,7 +118,7 @@
                             <th><input value="" name="DEGREE_LVL" size="15"></th>
                             <th><input value="" name="CONCENTRATION_REQ" size="12"></th>
                             <th><input value="" name="DEPTNAME" size="35"></th>
-                            <th><input value="" name="CATEG_LIST" size="12"></th>
+                            <th><input value="" name="CATEG_DEGREE_ID" size="12"></th>
                             <th><input type="submit" value="Insert"></th>
                     </tr>
 
@@ -136,8 +136,8 @@
 
                             <%-- Get the degreeid, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("DEGREEID") %>" 
-                                    name="DEGREEID" size="10">
+                                <input value="<%= rs.getInt("DEGREE_ID") %>" 
+                                    name="DEGREE_ID" size="10">
                             </td>
     
                             <%-- Get the total units, which a number --%>
@@ -172,7 +172,7 @@
     
                             <%-- Get the category list--%>
                             <td>
-                                <input value="<%= rs.getInt("categ_list") %>"
+                                <input value="<%= rs.getInt("CATEG_DEGREE_ID") %>"
                                     name="catagory_list" size="35">
                             </td>
                     </tr>
