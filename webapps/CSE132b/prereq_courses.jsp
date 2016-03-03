@@ -39,10 +39,12 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO PREREQ_COURSES VALUES (?, ?)");
+ 
+                            "INSERT INTO Prereq_courses VALUES (?, ?)");
 
-                        pstmt.setInt(2, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
-                        pstmt.setString(3, request.getParameter("P_COURSES"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
+                        pstmt.setString(2, request.getParameter("P_COURSES"));
+ 
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -51,6 +53,55 @@
                     }
             %>
 
+ 
+             <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the section attributes in the Section table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Prereq_courses SET PREREQ_LIST_ID = ?, P_COURSES=?");
+
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
+                        pstmt.setString(2, request.getParameter("P_COURSES"));
+                  
+                        int rowCount = pstmt.executeUpdate();
+                        
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the section FROM the Section table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Prereq_courses WHERE PREREQ_LIST_ID = ?");
+
+                        pstmt.setInt(
+                            1, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+ 
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                     // Create the statement
@@ -88,8 +139,10 @@
                     <tr>
                         <form action="prereq_courses.jsp" method="get">
                             <input type="hidden" value="update" name="action">
-    
-                            <%-- Get the PREREQ_LIST_ID --%>
+ 
+
+                            <%-- Get the PREREQ_LIST_ID, which is a number --%>
+ 
                             <td>
                                 <input value="<%= rs.getInt("PREREQ_LIST_ID") %>" 
                                     name="PREREQ_LIST_ID" size="10">
@@ -100,7 +153,18 @@
                                 <input value="<%= rs.getString("P_COURSES") %>" 
                                     name="P_COURSES" size="10">
                             </td>
-
+ 
+                        </form>
+                        <form action="prereq_courses.jsp" method="get">
+                            <input type="hidden" value="delete" name="action">
+                            <input type="hidden" 
+                                value="<%= rs.getInt("PREREQ_LIST_ID") %>" name="PID">
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Delete">
+                            </td>
+                        </form>
+ 
                     </tr>
             <%
                     }

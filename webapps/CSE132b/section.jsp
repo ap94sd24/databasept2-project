@@ -1,4 +1,4 @@
-n<html>
+ n<html>
 
 <body>
     <table border="1"style="background-color:rgba(0,0,0,0.5);">
@@ -27,7 +27,6 @@ n<html>
                     Connection conn = DriverManager.getConnection
                         ("jdbc:postgresql://localhost:5432/postgres", 
                             "postgres", "cse132b");
-
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -35,7 +34,6 @@ n<html>
                     String action = request.getParameter("action");
                     // Check if an insertion is requested
                     if (action != null && action.equals("insert")) {
-
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
@@ -43,7 +41,6 @@ n<html>
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SECT_ID")));
                         pstmt.setString(2, request.getParameter("TITLE"));
                         pstmt.setString(3, request.getParameter("COURSE_NO"));
@@ -60,21 +57,69 @@ n<html>
                         pstmt.setInt(14, Integer.parseInt(request.getParameter("REV_ID")));
                         pstmt.setString(15, request.getParameter("QUARTER"));
                         pstmt.setInt(16, Integer.parseInt(request.getParameter("YEAR")));
-
                         int rowCount = pstmt.executeUpdate();
                     
-
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
 
+              <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the student attributes in the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Section SET SECT_ID = ?, TITLE = ?,COURSE_NO = ?, LECT_DATE_ID = ?, DIS_DATE_ID = ?, BUILDING = ?, ROOM = ?, MAXCAP =?, LAB_ID = ?, LECT_TIME_START = ?, LECT_TIME_END = ?, DIS_TIME_START = ?, DIS_TIME_END = ?, REV_ID = ?, QUARTER = ?, YEAR = ? WHERE SID = ?");
+
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(2, request.getParameter("STATUS"));
+                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
+                        pstmt.setString(4, request.getParameter("MIDDLENAME"));
+                        pstmt.setString(5, request.getParameter("LASTNAME"));
+                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SECT_ID")));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the student FROM the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Section WHERE SECT_ID = ?");
+
+                        pstmt.setInt(
+                            1, Integer.parseInt(request.getParameter("SECT_ID")));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                     // Create the statement
                     Statement statement = conn.createStatement();
-
                     // Use the created statement to SELECT
                     // the section attributes FROM the Section table.
                     ResultSet rs = statement.executeQuery
@@ -228,6 +273,21 @@ n<html>
                                 <input value="<%= rs.getInt("YEAR") %>" 
                                     name="YEAR" size="10">
                             </td>
+
+                          <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Update">
+                            </td>
+                        </form>
+                        <form action="section.jsp" method="get">
+                            <input type="hidden" value="delete" name="action">
+                            <input type="hidden" 
+                                value="<%= rs.getInt("SECT_ID") %>" name="SECT_ID">
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Delete">
+                            </td>
+                        </form>
                     </tr>
             <%
                     }
