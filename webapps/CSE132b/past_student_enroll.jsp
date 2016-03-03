@@ -39,73 +39,18 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO PAST_STUDENT_ENROLLMENT VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO PAST_STUDENT_ENROLLMENT VALUES (?, ?, ?, ?, ?, ?)");
 
-                        pstmt.setInt( 1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("CID"));
-                        pstmt.setInt( 3, Integer.parseInt(request.getParameter("SECTID")));
+                        pstmt.setInt( 1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(2, request.getParameter("COURSE_NO"));
+                        pstmt.setInt( 3, Integer.parseInt(request.getParameter("SECT_ID")));
                         pstmt.setString(4, request.getParameter("GRADE"));
                         pstmt.setString(5, request.getParameter("QUARTER"));
                         pstmt.setInt(6, Integer.parseInt(request.getParameter("YEAR")));
-                        pstmt.setString(5, request.getParameter("CLASS_TKN_ID"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Past_student_enrollment SET SID = ?,CID = ?, SECTID = ?, " +
-                            "GRADE = ?, QUARTER = ?, YEAR = ?, CLASS_TKN_ID = ? WHERE SID = ? and CLASS_TKN_ID = ?");
-
-                        pstmt.setInt( 1, Integer.parseInt(request.getParameter("SID")));
-                        pstmt.setString(2, request.getParameter("CID"));
-                        pstmt.setInt( 3, Integer.parseInt(request.getParameter("SECTID")));
-                        pstmt.setString(4, request.getParameter("GRADE"));
-                        pstmt.setString(5, request.getParameter("QUARTER"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("YEAR")));
-                        pstmt.setString(5, request.getParameter("CLASS_TKN_ID"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Past_student_enrollment WHERE SID = ? AND CLASS_TKN_ID = ?");
-
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SID")));
-                      pstmt.setString(
-                            2, request.getParameter("SID"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -124,10 +69,10 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
-                        <th>CID</th>
-                        <th>SECTID</th>
-                        <th>GRADE</th>
+                        <th>SSN</th>
+                        <th>COURSE_NO</th>
+                        <th>SECTION ID</th>
+                        <th>GRADE RECEIVED</th>
                         <th>QUARTER</th>
                         <th>YEAR</th>
                                            
@@ -136,9 +81,9 @@
                     <tr>
                         <form action="past_student_enroll.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>
-                            <th><input value="" name="CID" size="15"></th>
-                            <th><input value="" name="SECTID" size="15"></th>
+                            <th><input value="" name="SSN" size="10"></th>
+                            <th><input value="" name="COURSE_NO" size="15"></th>
+                            <th><input value="" name="SECT_ID" size="15"></th>
                             <th><input value="" name="GRADE" size="15"></th>
                             <th><input value="" name="QUARTER" size="15"></th>
                             <th><input value="" name="YEAR" size="15"></th>
@@ -160,22 +105,22 @@
                             <input type="hidden" value="update" name="action">
 
     
-                            <%-- Get the SID --%>
+                            <%-- Get the SSN --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
+                                <input value="<%= rs.getInt("SSN") %>" 
+                                    name="SSN" size="10">
                             </td>
 
                              <%-- Get the COURSE ID --%>
                             <td>
-                                <input value="<%= rs.getString("CID") %>" 
-                                    name="CID" size="15">
+                                <input value="<%= rs.getString("COURSE_NO") %>" 
+                                    name="COURSE_NO" size="15">
                             </td>
     
                             <%-- Get the SECTION ID --%>
                             <td>
-                                <input value="<%= rs.getInt("SECTID") %>"
-                                    name="SECTID" size="15">
+                                <input value="<%= rs.getInt("SECT_ID") %>"
+                                    name="SECT_ID" size="15">
                             </td>
     
                             <%-- Get the GRADE --%>
@@ -195,22 +140,6 @@
                                 <input value="<%= rs.getString("YEAR") %>" 
                                     name="YEAR" size="15">
                             </td>
-
-    
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="past_student_enroll.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("SID, CLASS_TKN_ID") %>" name="PAST ENROLLMENTID">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }
