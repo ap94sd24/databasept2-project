@@ -1,4 +1,4 @@
-<html>
+n<html>
 
 <body>
     <table border="1"style="background-color:rgba(0,0,0,0.5);">
@@ -42,23 +42,24 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Section VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SECTID")));
-
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SECT_ID")));
                         pstmt.setString(2, request.getParameter("TITLE"));
-                        pstmt.setDate(3, java.sql.Date.valueOf(request.getParameter("LECDATE")));
-                        pstmt.setDate(4, java.sql.Date.valueOf(request.getParameter("DISCDATE")));
-
-                        pstmt.setString(5, request.getParameter("BUILDING"));
-                        pstmt.setString(6, request.getParameter("ROOM"));
-                        pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
-                        pstmt.setString(8, request.getParameter("LAB_ID"));
-                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("LEC_TIME_START")));
-                        pstmt.setTime(10, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
-                        pstmt.setTime(11, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
-                        pstmt.setTime(12, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
-                        pstmt.setString(13, request.getParameter("REV_ID"));
+                        pstmt.setString(3, request.getParameter("COURSE_NO"));
+                        pstmt.setString(4, request.getParameter("LECT_DATE_ID"));
+                        pstmt.setString(5, request.getParameter("DIS_DATE_ID"));
+                        pstmt.setString(6, request.getParameter("BUILDING"));
+                        pstmt.setString(7, request.getParameter("ROOM"));
+                        pstmt.setInt(8, Integer.parseInt(request.getParameter("MAXCAP")));
+                        pstmt.setInt(9, Integer.parseInt(request.getParameter("LAB_ID")));
+                        pstmt.setTime(10, java.sql.Time.valueOf(request.getParameter("LECT_TIME_START")));
+                        pstmt.setTime(11, java.sql.Time.valueOf(request.getParameter("LECT_TIME_END")));
+                        pstmt.setTime(12, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
+                        pstmt.setTime(13, java.sql.Time.valueOf(request.getParameter("DIS_TIME_END")));
+                        pstmt.setInt(14, Integer.parseInt(request.getParameter("REV_ID")));
+                        pstmt.setString(15, request.getParameter("QUARTER"));
+                        pstmt.setInt(16, Integer.parseInt(request.getParameter("YEAR")));
 
                         int rowCount = pstmt.executeUpdate();
                     
@@ -69,7 +70,7 @@
                     }
             %>
 
-            <%-- -------- UPDATE Code -------- --%>
+               <%-- -------- UPDATE Code -------- --%>
             <%
                     // Check if an update is requested
                     if (action != null && action.equals("update")) {
@@ -78,28 +79,18 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // UPDATE the section attributes in the Section table.
+                        // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Section SET SECTID = ?, TITLE = ?, LECTDATE = ?, " +
-                            "DISCDATE = ?, BUILDING = ?, ROOM = ?, MAXCAP = ?, LAB_ID = ?, LECT_TIME_START = ?, LECT_TIME_END = ?, DIS_TIME_START = ?, DIS_TIME_END = ?, REV_ID = ?  WHERE SECTID = ?");
+                            "UPDATE Section SET SECT_ID = ?, TITLE = ?,COURSE_NO = ?, LECT_DATE_ID = ?, DIS_DATE_ID = ?, BUILDING = ?, ROOM = ?, MAXCAP =?, LAB_ID = ?, LECT_TIME_START = ?, LECT_TIME_END = ?, DIS_TIME_START = ?, DIS_TIME_END = ?, REV_ID = ?, QUARTER = ?, YEAR = ? WHERE SID = ?");
 
-                       pstmt.setInt(1, Integer.parseInt(request.getParameter("SECTID")));
-
-                        pstmt.setString(2, request.getParameter("TITLE"));
-                        pstmt.setDate(3, java.sql.Date.valueOf(request.getParameter("LECDATE")));
-                        pstmt.setDate(4, java.sql.Date.valueOf(request.getParameter("DISCDATE")));
-
-                        pstmt.setString(5, request.getParameter("BUILDING"));
-                        pstmt.setString(6, request.getParameter("ROOM"));
-                        pstmt.setInt(7, Integer.parseInt(request.getParameter("MAXCAP")));
-                        pstmt.setString(8, request.getParameter("LAB_ID"));
-                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("LEC_TIME_START")));
-                        pstmt.setTime(10, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
-                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
-                        pstmt.setTime(9, java.sql.Time.valueOf(request.getParameter("LEC_TIME_END")));
-                        pstmt.setString(13, request.getParameter("REV_ID"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(2, request.getParameter("STATUS"));
+                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
+                        pstmt.setString(4, request.getParameter("MIDDLENAME"));
+                        pstmt.setString(5, request.getParameter("LASTNAME"));
+                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SECT_ID")));
                         int rowCount = pstmt.executeUpdate();
-                        
+
                         // Commit transaction
                          conn.commit();
                         conn.setAutoCommit(true);
@@ -115,12 +106,12 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // DELETE the section FROM the Section table.
+                        // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Section WHERE SECTID = ?");
+                            "DELETE FROM Section WHERE SECT_ID = ?");
 
                         pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SECTID")));
+                            1, Integer.parseInt(request.getParameter("SECT_ID")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -128,6 +119,8 @@
                         conn.setAutoCommit(true);
                     }
             %>
+
+
 
             <%-- -------- SELECT Statement Code -------- --%>
             <%
@@ -143,10 +136,11 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SECTID</th>
+                        <th>SECT_ID</th>
                         <th>TITLE</th>
-                        <th>LECTDATE</th>
-                        <th>DISCDATE</th>
+                        <th>COURSE NO</th>
+                        <th>LECTURE DATE</th>
+                        <th>DISS DATE</th>
                         <th>BUILDING</th>
                         <th>ROOM</th>
                         <th>MAXCAP</th>
@@ -156,16 +150,19 @@
                         <th>DIS_TIME_START</th>
                         <th>DIS_TIME_END</th>
                         <th>REVIEW ID </th> 
+                        <th>QUARTER</th> 
+                        <th>YEAR</th> 
 
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="section.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SECTID" size="10"></th>
+                            <th><input value="" name="SECT_ID" size="10"></th>
                             <th><input value="" name="TITLE" size="10"></th>
-                            <th><input value="" name="LECTDATE" size="10"></th>
-                            <th><input value="" name="DISCDATE" size="10"></th>
+                            <th><input value="" name="COURSE_NO" size="10"></th>
+                            <th><input value="" name="LECT_DATE_ID" size="10"></th>
+                            <th><input value="" name="DIS_DATE_ID" size="10"></th>
                             <th><input value="" name="BUILDING" size="10"></th>
                             <th><input value="" name="ROOM" size="10"></th>
                             <th><input value="" name="MAXCAP" size="10"></th>
@@ -175,6 +172,8 @@
                             <th><input value="" name="DIS_TIME_START" size="10"></th>
                             <th><input value="" name="DIS_TIME_END" size="10"></th>
                             <th><input value="" name="REV_ID" size="10"></th>
+                            <th><input value="" name="QUARTER" size="10"></th>
+                            <th><input value="" name="YEAR" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -189,12 +188,11 @@
 
                     <tr>
                         <form action="section.jsp" method="get">
-                            <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SECTID, which is a number --%>
+                            <%-- Get the SECT_ID, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("SECTID") %>" 
-                                    name="SECTID" size="10">
+                                <input value="<%= rs.getInt("SECT_ID") %>" 
+                                    name="SECT_ID" size="10">
                             </td>
                              <%-- Get the TITLE, which is a string --%>
                             <td>
@@ -202,16 +200,22 @@
                                     name="TITLE" size="10">
                             </td>
 
-                            <%-- Get the LECTDATE, which is a date --%>
+                            <%-- Get the TITLE, which is a string --%>
                             <td>
-                                <input value="<%= rs.getDate("LECTDATE") %>" 
-                                    name="LECTDATE" size="10">
+                                <input value="<%= rs.getString("COURSE_NO") %>" 
+                                    name="COURSE_NO" size="10">
                             </td>
 
-                             <%-- Get the DISCDATE, which is a date --%>
+                            <%-- Get the LECTDATE, which is a date --%>
                             <td>
-                                <input value="<%= rs.getDate("DISCDATE") %>" 
-                                    name="DISCDATE" size="10">
+                                <input value="<%= rs.getString("LECT_DATE_ID") %>" 
+                                    name="LECT_DATE_ID" size="10">
+                            </td>
+
+                             <%-- Get the DIS_DATE_ID, which is a date --%>
+                            <td>
+                                <input value="<%= rs.getString("DIS_DATE_ID") %>" 
+                                    name="DIS_DATE_ID" size="10">
                             </td>
     
                             <%-- Get the BUILDING, which is a string --%>
@@ -233,7 +237,7 @@
 
                              <%-- Get the lab id, which is a string --%>
                             <td>
-                                <input value="<%= rs.getString("LAB_ID") %>" 
+                                <input value="<%= rs.getInt("LAB_ID") %>" 
                                     name="LAB_ID" size="10">
                             </td>
 
@@ -263,13 +267,21 @@
 
                              <%-- Get the review id, which is a string --%>
                             <td>
-                                <input value="<%= rs.getTime("REV_ID") %>" 
+                                <input value="<%= rs.getInt("REV_ID") %>" 
                                     name="REV_ID" size="10">
                             </td>
 
-    
-    
-                            <%-- Button --%>
+                            <td>
+                                <input value="<%= rs.getString("QUARTER") %>" 
+                                    name="QUARTER" size="10">
+                            </td>
+
+                            <td>
+                                <input value="<%= rs.getInt("YEAR") %>" 
+                                    name="YEAR" size="10">
+                            </td>
+
+                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
                             </td>
@@ -277,7 +289,7 @@
                         <form action="section.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("SECTID") %>" name="SECTID">
+                                value="<%= rs.getInt("SECT_ID") %>" name="SECT_ID">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

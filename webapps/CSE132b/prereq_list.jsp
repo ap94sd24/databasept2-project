@@ -39,9 +39,9 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO PREREQ VALUES (?)");
+                            "INSERT INTO Prereq_list VALUES (?)");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("PREREQID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
                       
                         int rowCount = pstmt.executeUpdate();
 
@@ -62,9 +62,9 @@
                         // Create the prepared statement and use it to
                         // UPDATE the section attributes in the Section table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Prereq_LIST SET PREREQID = ? WHERE PREREQID = ?");
+                            "UPDATE Prereq_LIST SET PREREQ_LIST_ID = ? WHERE PREREQ_LIST_ID = ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("PREREQID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
                     
                         int rowCount = pstmt.executeUpdate();
                         
@@ -85,10 +85,10 @@
                         // Create the prepared statement and use it to
                         // DELETE the section FROM the Section table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM PREREQ_LIST WHERE PREREQID = ?");
+                            "DELETE FROM PREREQ_LIST WHERE PREREQ_LIST_ID = ?");
 
                         pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("PREREQID")));
+                            1, Integer.parseInt(request.getParameter("PREREQ_LIST_ID")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -112,13 +112,13 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>PREREQID</th>
+                        <th>Prereq ID</th>
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="prereq_courses.jsp" method="get">
+                        <form action="prereq_list.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="PREREQID" size="10"></th>
+                            <th><input value="" name="PREREQ_LIST_ID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -132,13 +132,13 @@
             %>
 
                     <tr>
-                        <form action="prereq_courses.jsp" method="get">
+                        <form action="prereq_list.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the PREREQID, which is a number --%>
+                            <%-- Get the PREREQ_LIST_ID, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("PREREQID") %>" 
-                                    name="PID" size="10">
+                                <input value="<%= rs.getInt("PREREQ_LIST_ID") %>" 
+                                    name="PREREQ_LIST_ID" size="10">
                             </td>
     
                             <%-- Button --%>
@@ -149,7 +149,7 @@
                         <form action="prereq_list.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("PREREQID") %>" name="PREREQID">
+                                value="<%= rs.getInt("PREREQ_LIST_ID") %>" name="PREREQ_LIST_ID">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
