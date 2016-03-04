@@ -39,16 +39,63 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the PREV_DEGREE table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO ADVISES VALUES (?, ?, ?, ?)");
+                            "INSERT INTO ADVISES VALUES (?, ?)");
 
                        // pstmt.setString(1, request.getParameter("SID"));
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(2, request.getParameter("FNAME"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+              <%-- -------- UPDATE Code -------- --%>
+            <%
+                    // Check if an update is requested
+                    if (action != null && action.equals("update")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // UPDATE the student attributes in the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "UPDATE Advises SET SID = ?,FNAME = ? WHERE SSN = ? AND FNAME = ?");
+
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        pstmt.setString(2, request.getParameter("FNAME"));
+                        int rowCount = pstmt.executeUpdate();
+
+                        // Commit transaction
+                         conn.commit();
+                        conn.setAutoCommit(true);
+                    }
+            %>
+
+            <%-- -------- DELETE Code -------- --%>
+            <%
+                    // Check if a delete is requested
+                    if (action != null && action.equals("delete")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // DELETE the student FROM the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "DELETE FROM Advises WHERE SSN = ?");
+
+                        pstmt.setInt(
+                            1, Integer.parseInt(request.getParameter("SSN")));
+                        int rowCount = pstmt.executeUpdate();
+                        pstmt.setString(2, request.getParameter("FNAME"));
+
+                        // Commit transaction
+                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -67,14 +114,14 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>SID</th>
+                        <th>SSN</th>
                         <th>FNAME</th>                 
                         <th>Action</th>
                     </tr>
                     <tr>
                         <form action="advises.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SID" size="10"></th>
+                            <th><input value="" name="SSN" size="10"></th>
                             <th><input value="" name="FNAME" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
@@ -92,9 +139,9 @@
                         <form action="advises.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SID, which is a integer --%>
+                            <%-- Get the SSN, which is a integer --%>
                             <td>
-                                <input value="<%= rs.getInt("SID") %>" 
+                                <input value="<%= rs.getInt("SSN") %>" 
                                     name="SID" size="10">
                             </td>
                              <%-- Get the FNAME, which is a string --%>

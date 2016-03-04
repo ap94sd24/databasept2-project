@@ -40,23 +40,24 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                            "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SECT_ID")));
                         pstmt.setString(2, request.getParameter("TITLE"));
-                        pstmt.setString(3, request.getParameter("COURSE_NO"));
-                        pstmt.setString(4, request.getParameter("LECT_DATE_ID"));
-                        pstmt.setString(5, request.getParameter("DIS_DATE_ID"));
-                        pstmt.setString(6, request.getParameter("BUILDING"));
-                        pstmt.setString(7, request.getParameter("ROOM"));
-                        pstmt.setInt(8, Integer.parseInt(request.getParameter("MAXCAP")));
-                        pstmt.setInt(9, Integer.parseInt(request.getParameter("LAB_ID")));
-                        pstmt.setTime(10, java.sql.Time.valueOf(request.getParameter("LECT_TIME_START")));
-                        pstmt.setTime(11, java.sql.Time.valueOf(request.getParameter("LECT_TIME_END")));
-                        pstmt.setTime(12, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
-                        pstmt.setTime(13, java.sql.Time.valueOf(request.getParameter("DIS_TIME_END")));
-                        pstmt.setInt(14, Integer.parseInt(request.getParameter("REV_ID")));
-                        pstmt.setString(15, request.getParameter("QUARTER"));
-                        pstmt.setInt(16, Integer.parseInt(request.getParameter("YEAR")));
+                        pstmt.setString(3, request.getParameter("FNAME"));
+                        pstmt.setString(4, request.getParameter("COURSE_NO"));
+                        pstmt.setString(5, request.getParameter("LECT_DATE_ID"));
+                        pstmt.setString(6, request.getParameter("DIS_DATE_ID"));
+                        pstmt.setString(7, request.getParameter("BUILDING"));
+                        pstmt.setString(8, request.getParameter("ROOM"));
+                        pstmt.setInt(9, Integer.parseInt(request.getParameter("MAXCAP")));
+                        pstmt.setInt(10, Integer.parseInt(request.getParameter("LAB_ID")));
+                        pstmt.setTime(11, java.sql.Time.valueOf(request.getParameter("LECT_TIME_START")));
+                        pstmt.setTime(12, java.sql.Time.valueOf(request.getParameter("LECT_TIME_END")));
+                        pstmt.setTime(13, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
+                        pstmt.setTime(14, java.sql.Time.valueOf(request.getParameter("DIS_TIME_END")));
+                        pstmt.setInt(15, Integer.parseInt(request.getParameter("REV_ID")));
+                        pstmt.setString(16, request.getParameter("QUARTER"));
+                        pstmt.setInt(17, Integer.parseInt(request.getParameter("YEAR")));
                         int rowCount = pstmt.executeUpdate();
                     
                         // Commit transaction
@@ -76,15 +77,27 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Section SET SECT_ID = ?, TITLE = ?,COURSE_NO = ?, LECT_DATE_ID = ?, DIS_DATE_ID = ?, BUILDING = ?, ROOM = ?, MAXCAP =?, LAB_ID = ?, LECT_TIME_START = ?, LECT_TIME_END = ?, DIS_TIME_START = ?, DIS_TIME_END = ?, REV_ID = ?, QUARTER = ?, YEAR = ? WHERE SID = ?");
+                            "UPDATE Section SET SECT_ID = ?, TITLE = ?, FNAME = ?, COURSE_NO = ?, LECT_DATE_ID = ?, DIS_DATE_ID = ?, BUILDING = ?, ROOM = ?, MAXCAP =?, LAB_ID = ?, LECT_TIME_START = ?, LECT_TIME_END = ?, DIS_TIME_START = ?, DIS_TIME_END = ?, REV_ID = ?, QUARTER = ?, YEAR = ? WHERE SID = ?");
 
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setString(2, request.getParameter("STATUS"));
-                        pstmt.setString(3, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(4, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(5, request.getParameter("LASTNAME"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("SECT_ID")));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SECT_ID")));
+                        pstmt.setString(2, request.getParameter("TITLE"));
+                        pstmt.setString(3, request.getParameter("FNAME"));
+                        pstmt.setString(4, request.getParameter("COURSE_NO"));
+                        pstmt.setString(5, request.getParameter("LECT_DATE_ID"));
+                        pstmt.setString(6, request.getParameter("DIS_DATE_ID"));
+                        pstmt.setString(7, request.getParameter("BUILDING"));
+                        pstmt.setString(8, request.getParameter("ROOM"));
+                        pstmt.setInt(9, Integer.parseInt(request.getParameter("MAXCAP")));
+                        pstmt.setInt(10, Integer.parseInt(request.getParameter("LAB_ID")));
+                        pstmt.setTime(11, java.sql.Time.valueOf(request.getParameter("LECT_TIME_START")));
+                        pstmt.setTime(12, java.sql.Time.valueOf(request.getParameter("LECT_TIME_END")));
+                        pstmt.setTime(13, java.sql.Time.valueOf(request.getParameter("DIS_TIME_START")));
+                        pstmt.setTime(14, java.sql.Time.valueOf(request.getParameter("DIS_TIME_END")));
+                        pstmt.setInt(15, Integer.parseInt(request.getParameter("REV_ID")));
+                        pstmt.setString(16, request.getParameter("QUARTER"));
+                        pstmt.setInt(17, Integer.parseInt(request.getParameter("YEAR")));
                         int rowCount = pstmt.executeUpdate();
+                          
 
                         // Commit transaction
                          conn.commit();
@@ -131,6 +144,7 @@
                     <tr>
                         <th>SECT_ID</th>
                         <th>TITLE</th>
+                        <th>FNAME </th>
                         <th>COURSE NO</th>
                         <th>LECTURE DATE</th>
                         <th>DISS DATE</th>
@@ -153,6 +167,7 @@
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="SECT_ID" size="10"></th>
                             <th><input value="" name="TITLE" size="10"></th>
+                            <th><input value="" name="FNAME" size="10"></th> 
                             <th><input value="" name="COURSE_NO" size="10"></th>
                             <th><input value="" name="LECT_DATE_ID" size="10"></th>
                             <th><input value="" name="DIS_DATE_ID" size="10"></th>
@@ -190,6 +205,12 @@
                              <%-- Get the TITLE, which is a string --%>
                             <td>
                                 <input value="<%= rs.getString("TITLE") %>" 
+                                    name="TITLE" size="10">
+                            </td>
+
+                            <%-- Get the Faculty Name, which is a string --%>
+                            <td>
+                                <input value="<%= rs.getString("FNAME") %>" 
                                     name="TITLE" size="10">
                             </td>
 
