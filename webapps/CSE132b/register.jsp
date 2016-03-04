@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -165,7 +165,7 @@
                             <%-- Get the GRADE OPTION, which is a string --%>
                             <td>
                                 <input value="<%= rs.getString("GRADE_OPT") %>" 
-                                    name="GRADE OPTION" size="10">
+                                    name="GRADE_OPT" size="10">
                             </td>
 
                              <%-- Get the UNITS, which is a int --%>
@@ -174,21 +174,6 @@
                                     name="UNITS" size="10">
                             </td>
 
-    
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="register.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getString("SSN,SECT_ID") %>" name="REGISTER">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }
