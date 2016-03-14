@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -117,7 +117,7 @@
                              <%-- Get the MTITLE, which is a string --%>
                             <td>
                                 <input value="<%= rs.getString("MAJOR_TITLE") %>" 
-                                    name="MAJOR_TITLE" size="10">
+                                    name="MAJOR_TITLE" size="30">
                             </td>
 
                               <%-- Get the TITLE, which is a string --%>

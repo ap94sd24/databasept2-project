@@ -39,13 +39,14 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO CATEGORY_CLASSES VALUES (?, ?, ?, ?, ?)");
+                            "INSERT INTO CATEGORY_CLASSES VALUES (?, ?, ?, ?, ?,?)");
 
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("CATEG_CLASS_ID")));
                         pstmt.setInt(2, Integer.parseInt(request.getParameter("MIN_UNITS")));
                         pstmt.setInt(3, Integer.parseInt(request.getParameter("POSSIBLE_CLASSES_ID")));
                         pstmt.setBoolean(4, Boolean.parseBoolean(request.getParameter("IS_CONCENT")));
                         pstmt.setFloat(5, Float.parseFloat(request.getParameter("GPA_MIN")));
+                        pstmt.setString(6, request.getParameter("CATEG_NAME"));
 
                       
                         int rowCount = pstmt.executeUpdate();
@@ -75,6 +76,7 @@
                         <th>Possible Classes ID</th>
                         <th>Is a Concentration</th>
                         <th>Min GPA</th>
+                        <th>Category Name</th>
                                            
                         <th>Action</th>
                     </tr>
@@ -86,7 +88,7 @@
                             <th><input value="" name="POSSIBLE_CLASSES_ID" size="15"></th>
                             <th><input value="" name="IS_CONCENT" size="15"></th>
                             <th><input value="" name="GPA_MIN" size="15"></th>
-
+                            <th><input value="" name="CATEG_NAME" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -129,8 +131,14 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("GPA_MIN") %>" 
+                                <input value="<%= rs.getDouble("GPA_MIN") %>" 
                                     name="GPA_MIN" size="10">
+                            </td>
+
+                            <%-- Get the SSN, which is a number --%>
+                            <td>
+                                <input value="<%= rs.getString("CATEG_NAME") %>" 
+                                    name="CATEG_NAME" size="20">
                             </td>
                     </tr>
             <%

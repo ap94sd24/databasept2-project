@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -49,53 +49,6 @@
 
                         // Commit transaction
                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-              <%-- -------- UPDATE Code -------- --%>
-            <%
-                    // Check if an update is requested
-                    if (action != null && action.equals("update")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Advises SET SID = ?,FNAME = ? WHERE SSN = ? AND FNAME = ?");
-
-                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
-                        pstmt.setString(2, request.getParameter("FNAME"));
-                        int rowCount = pstmt.executeUpdate();
-
-                        // Commit transaction
-                         conn.commit();
-                        conn.setAutoCommit(true);
-                    }
-            %>
-
-            <%-- -------- DELETE Code -------- --%>
-            <%
-                    // Check if a delete is requested
-                    if (action != null && action.equals("delete")) {
-
-                        // Begin transaction
-                        conn.setAutoCommit(false);
-                        
-                        // Create the prepared statement and use it to
-                        // DELETE the student FROM the Student table.
-                        PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Advises WHERE SSN = ?");
-
-                        pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("SSN")));
-                        int rowCount = pstmt.executeUpdate();
-                        pstmt.setString(2, request.getParameter("FNAME"));
-
-                        // Commit transaction
-                         conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -139,31 +92,16 @@
                         <form action="advises.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SSN, which is a integer --%>
+                            <%-- Get the SID, which is a integer --%>
                             <td>
                                 <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SID" size="10">
+                                    name="SSN" size="10">
                             </td>
                              <%-- Get the FNAME, which is a string --%>
                             <td>
                                 <input value="<%= rs.getString("FNAME") %>" 
                                     name="FNAME" size="10">
                             </td>
-
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Update">
-                            </td>
-                        </form>
-                        <form action="advises.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getInt("SID,FNAME") %>" name="Advises">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
                     </tr>
             <%
                     }

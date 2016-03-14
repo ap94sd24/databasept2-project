@@ -34,20 +34,23 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT c.title FROM classes c");
+                        ("SELECT distinct s.* FROM past_student_enrollment pse, student s WHERE s.ssn = pse.ssn order by s.ssn");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>CLASS TITLE</th>
+                        <th>SSN</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
                                            
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <form action="display_1b.jsp" method="get">
+                        <form action="display_1c.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="TITLE" size="10"></th>
+                            <th><input value="" name="SSN" size="10"></th>
 
                             <th><input type="submit" value="Get Students"></th>
                         </form>
@@ -63,9 +66,18 @@
 
                     <tr>
                             <%-- Get the SSN, which is a number --%>
+                            <td><%= rs.getInt("SSN") %>
+                            </td>
+
                             <td>
-                                <input value="<%= rs.getString("TITLE") %>" 
-                                    name="TITLE" size="40">
+                            <%= rs.getString("FIRSTNAME") %>
+                            </td>
+                            <%-- Get the SSN, which is a number --%>
+                            <td> <%= rs.getString("MIDDLENAME") %>
+                            </td>
+                            <%-- Get the SSN, which is a number --%>
+                            <td>
+                                <%= rs.getString("LASTNAME") %>
                             </td>
                     </tr>
             <%
@@ -84,10 +96,10 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "SELECT DISTINCT c.course_no, s.*, co.units, r.grade_opt from courses co, classes c, student s, register r, section sect, past_student_enrollment pse WHERE c.title = ? AND c.course_no = sect.course_no AND sect.sect_id = r.sect_id AND s.ssn = r.ssn AND co.course_no = c.course_no");
+                            "select pse.quarter, pse.year, c.course_no, c.title from past_student_enrollment pse, courses co, classes c, student s where s.ssn = ? AND s.ssn = pse.ssn AND pse.course_no = co.course_no AND co.course_no = c.course_no GROUP BY pse.quarter, pse.year, c.course_no, c.title;");
 
                         
-                        pstmt.setString(1, request.getParameter("TITLE"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs = pstmt.executeQuery();
                     }
 
@@ -95,14 +107,10 @@
 
             <table border="1">
                     <tr>
+                        <th>Quarter</th>
+                        <th>Year</th>
                         <th>Course No</th>
-                        <th>SSN</th>
-                        <th>SID</th>
-                        <th>First</th>
-                        <th>Middle</th>
-                        <th>Last</th>
-                        <th>Units</th>
-                        <th>Grade Option</th>
+                        <th>Title</th>
                                         
 
              <%-- -------- Iteration Code -------- --%>
@@ -117,51 +125,31 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
+                                <input value="<%= rs.getString("QUARTER") %>" 
+                                    name="QUARTER" size="10">
+                            </td>
+                            <%-- Get the SSN, which is a number --%>
+                            <td>
+                                <input value="<%= rs.getInt("YEAR") %>" 
+                                    name="YEAR" size="10">
+                            </td>
+                            <%-- Get the SSN, which is a number --%>
+                            <td>
                                 <input value="<%= rs.getString("COURSE_NO") %>" 
                                     name="COURSE_NO" size="10">
                             </td>
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SSN" size="10">
+                                <input value="<%= rs.getString("TITLE") %>" 
+                                    name="TITLE" size="40">
                             </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("FIRSTNAME") %>" 
-                                    name="FIRSTNAME" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("MIDDLENAME") %>" 
-                                    name="MIDDLENAME" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("LASTNAME") %>" 
-                                    name="LASTNAME" size="10">
-                            </td>
-
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("UNITS") %>" 
-                                    name="UNITS" size="10">
-                            </td>
-
-                            <td>
-                                <input value="<%= rs.getString("GRADE_OPT") %>" 
-                                    name="GRADE_OPT" size="10">
-                            </td>
-
                     </tr>
             <%
                     }
             %>
-            <%        
+
+            <%-- -------- GPA BY TERM -------- --%>
+            <%
                     action = request.getParameter("action");
                     // Check if an insertion is requested
                     if (action != null && action.equals("insert")) {
@@ -172,12 +160,22 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "SELECT DISTINCT c.course_no, s.*, co.units, pse.grade_opt from courses co, classes c, student s, section sect, past_student_enrollment pse WHERE c.title = ? AND c.course_no = sect.course_no AND sect.sect_id = pse.sect_id AND s.ssn = pse.ssn AND co.course_no = c.course_no");
+                            "select pse.quarter, pse.year, avg(gc.number_grade) AS TOTAL_GPA FROM grade_conversion gc, past_student_enrollment pse WHERE pse.ssn = ? AND pse.grade = gc.letter_grade GROUP BY pse.quarter, pse.year;");
 
                         
-                        pstmt.setString(1, request.getParameter("TITLE"));
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs = pstmt.executeQuery();
                     }
+
+            %>
+
+            <table border="1">
+                    <tr>
+                        <th>Total GPA</th>
+                                        
+
+             <%-- -------- Iteration Code -------- --%>
+            <%
                     // Iterate over the ResultSet
         
                     while ( rs.next() ) {
@@ -185,49 +183,67 @@
             %>
 
                     <tr>
-
-                            <%-- Get the SSN, which is a number --%>
+                    <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("COURSE_NO") %>" 
-                                    name="COURSE_NO" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("SSN") %>" 
-                                    name="SSN" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getInt("SID") %>" 
-                                    name="SID" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("FIRSTNAME") %>" 
-                                    name="FIRSTNAME" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("MIDDLENAME") %>" 
-                                    name="MIDDLENAME" size="10">
-                            </td>
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("LASTNAME") %>" 
-                                    name="LASTNAME" size="10">
+                                <input value="<%= rs.getString("QUARTER") %>" 
+                                    name="QUARTER" size="10">
                             </td>
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("UNITS") %>" 
-                                    name="UNITS" size="10">
+                                <input value="<%= rs.getInt("YEAR") %>" 
+                                    name="YEAR" size="10">
                             </td>
-
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("GRADE_OPT") %>" 
-                                    name="GRADE_OPT" size="10">
+                                <input value="<%= rs.getDouble("TOTAL_GPA") %>" 
+                                    name="TOTAL_GPA" size="10">
                             </td>
+                    </tr>
+            <%
+                    }
+            %>
 
+            <%-- -------- INSERT Code -------- --%>
+            <%
+                    action = request.getParameter("action");
+                    // Check if an insertion is requested
+                    if (action != null && action.equals("insert")) {
+
+                        // Begin transaction
+                        conn.setAutoCommit(false);
+                        
+                        // Create the prepared statement and use it to
+                        // INSERT the student attributes INTO the Student table.
+                        PreparedStatement pstmt = conn.prepareStatement(
+                            "select avg(gc.number_grade) AS TOTAL_GPA FROM grade_conversion gc, past_student_enrollment pse WHERE pse.ssn = ? AND pse.grade = gc.letter_grade;");
+
+                        
+                        pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
+                        rs = pstmt.executeQuery();
+                    }
+
+            %>
+
+            <table border="1">
+                    <tr>
+                        <th>Total GPA</th>
+                                        
+
+             <%-- -------- Iteration Code -------- --%>
+            <%
+                    // Iterate over the ResultSet
+        
+                    while ( rs.next() ) {
+        
+            %>
+
+                    <tr>
+                            <%-- Get the SSN, which is a number --%>
+                            <td>
+                                <input value="<%= rs.getDouble("TOTAL_GPA") %>" 
+                                    name="TOTAL_GPA" size="10">
+                            </td>
                     </tr>
             <%
                     }

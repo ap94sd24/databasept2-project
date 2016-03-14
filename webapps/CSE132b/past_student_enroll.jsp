@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -39,14 +39,15 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO PAST_STUDENT_ENROLLMENT VALUES (?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO PAST_STUDENT_ENROLLMENT VALUES (?, ?, ?, ?, ?, ?,?)");
 
                         pstmt.setInt( 1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt.setString(2, request.getParameter("COURSE_NO"));
                         pstmt.setInt( 3, Integer.parseInt(request.getParameter("SECT_ID")));
-                        pstmt.setString(4, request.getParameter("GRADE"));
-                        pstmt.setString(5, request.getParameter("QUARTER"));
-                        pstmt.setInt(6, Integer.parseInt(request.getParameter("YEAR")));
+                        pstmt.setString(4, request.getParameter("GRADE_OPT"));
+                        pstmt.setString(5, request.getParameter("GRADE"));
+                        pstmt.setString(6, request.getParameter("QUARTER"));
+                        pstmt.setInt(7, Integer.parseInt(request.getParameter("YEAR")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -75,6 +76,7 @@
                         <th>GRADE RECEIVED</th>
                         <th>QUARTER</th>
                         <th>YEAR</th>
+                        <th>GRADE OPTION</th>
                                            
                         <th>Action</th>
                     </tr>
@@ -87,7 +89,7 @@
                             <th><input value="" name="GRADE" size="15"></th>
                             <th><input value="" name="QUARTER" size="15"></th>
                             <th><input value="" name="YEAR" size="15"></th>
-
+                            <th><input value="" name="GRADE_OPT" size="15"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -137,8 +139,14 @@
 
                              <%-- Get the YEAR --%>
                             <td>
-                                <input value="<%= rs.getString("YEAR") %>" 
+                                <input value="<%= rs.getInt("YEAR") %>" 
                                     name="YEAR" size="15">
+                            </td>
+
+                             <%-- Get the YEAR --%>
+                            <td>
+                                <input value="<%= rs.getString("GRADE_OPT") %>" 
+                                    name="GRADE_OPT" size="15">
                             </td>
                     </tr>
             <%

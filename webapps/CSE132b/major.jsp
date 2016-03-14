@@ -22,7 +22,7 @@
     
                     // Make a connection to the Oracle datasource "cse132b"
                     Connection conn = DriverManager.getConnection
-                        ("jdbc:postgresql://localhost:5432/postgres", 
+                        ("jdbc:postgresql://localhost:5433/postgres", 
                             "postgres", "cse132b");
 
             %>
@@ -75,7 +75,7 @@
                     <tr>
                         <form action="major.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="MAJOR_TITLE" size="10"></th>
+                            <th><input value="" name="MAJOR_TITLE" size="30"></th>
                             <th><input value="" name="DEPTNAME" size="10"></th>
                             <th><input value="" name="DEGREEID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -97,7 +97,7 @@
                             <%-- Get the TITLE, which is a string --%>
                             <td>
                                 <input value="<%= rs.getString("MAJOR_TITLE") %>" 
-                                    name="MAJOR_TITLE" size="10">
+                                    name="MAJOR_TITLE" size="30">
                             </td>
 
                              <%-- Get the DEPTNAME, which is a string --%>

@@ -34,13 +34,16 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT c.ssn FROM curr_student_enrollment c");
+                        ("SELECT s.* FROM curr_student_enrollment c, student s WHERE s.ssn = c.ssn");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
                         <th>SSN</th>
+                        <th>First</th>
+                      <th>Middle</th>
+                        <th>Last</th>
                                            
                         <th>Action</th>
                     </tr>
@@ -67,6 +70,23 @@
                             <td>
                                 <input value="<%= rs.getInt("ssn") %>" 
                                     name="ssn" size="10">
+                            </td>
+                            <%-- Get the FIRSTNAME --%>
+                            <td>
+                                <input value="<%= rs.getString("FIRSTNAME") %>"
+                                    name="FIRSTNAME" size="15">
+                            </td>
+    
+                            <%-- Get the LASTNAME --%>
+                            <td>
+                                <input value="<%= rs.getString("MIDDLENAME") %>" 
+                                    name="MIDDLENAME" size="15">
+                            </td>
+    
+                             <%-- Get the LASTNAME --%>
+                            <td>
+                                <input value="<%= rs.getString("LASTNAME") %>" 
+                                    name="LASTNAME" size="15">
                             </td>
     
                         </form>
