@@ -1,0 +1,128 @@
+MILESTONE 5 query for insert
+
+//TABLES 
+delete from past_student_enrollment
+where ssn = 40; 
+drop table cpg;
+drop table cpqg;
+
+SELECT pse.course_no, s.faculty, substring(pse.grade from 1 for 1) as grade, count(substring(pse.grade from 1 for 1)) as count
+INTO CPG
+FROM past_student_enrollment pse, section s
+WHERE pse.sect_id = s.sect_id AND pse.quarter = s.quarter AND pse.year = s.year
+GROUP BY pse.course_no, s.faculty, substring(pse.grade from 1 for 1)
+ORDER BY pse.course_no;
+
+SELECT pse.course_no, s.faculty, pse.quarter, pse.year, substring(pse.grade from 1 for 1) as grade, count(substring(pse.grade from 1 for 1)) as count
+INTO CPQG
+FROM past_student_enrollment pse, section s
+WHERE pse.sect_id = s.sect_id AND pse.quarter = s.quarter AND pse.year = s.year
+GROUP BY pse.course_no, s.faculty, substring(pse.grade from 1 for 1), pse.quarter, pse.year
+ORDER BY pse.course_no;
+
+select * from cpqg;
+
+//TRIGGERS
+drop trigger insertcpg on past_student_enrollment;
+
+CREATE OR REPLACE FUNCTION log_checkExistCPG()
+  RETURNS trigger AS $$
+BEGIN
+	IF EXISTS (SELECT * 
+	FROM CPG c
+	WHERE c.faculty = new.faculty
+	AND c.course_no = new.course_no
+	AND new.grade = substring(new.grade from 1 for 1))
+	THEN
+		UPDATE CPG 
+		SET count = count + 1
+		WHERE course_no = new.course_no
+		AND faculty = new.faculty
+		AND grade = substring(new.grade from 1 for 1);
+	RETURN NULL;
+	ELSE
+	RETURN NEW;
+	END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER checkExistCPG
+ BEFORE INSERT ON CPG
+ FOR EACH ROW 
+ EXECUTE PROCEDURE log_checkExistCPG();
+
+
+CREATE OR REPLACE FUNCTION log_checkExistCPQG()
+  RETURNS trigger AS $$
+BEGIN
+	IF EXISTS (SELECT * 
+	FROM CPQG c
+	WHERE c.faculty = new.faculty
+	AND c.course_no = new.course_no
+	AND c.quarter = new.quarter
+	AND c.year = new.year
+	AND c.grade = substring(new.grade from 1 for 1))
+	THEN
+		UPDATE CPQG 
+		SET count = count + 1
+		WHERE course_no = new.course_no
+		AND faculty = new.faculty
+		AND grade = substring(new.grade from 1 for 1)
+		AND quarter = new.quarter
+		AND year = new.year;
+	RETURN NULL;
+	ELSE
+	RETURN NEW;
+	END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+ CREATE TRIGGER checkExistCPQG
+ BEFORE INSERT ON CPQG
+ FOR EACH ROW 
+ EXECUTE PROCEDURE log_checkExistCPQG();
+
+CREATE OR REPLACE FUNCTION log_insertCPG()
+  RETURNS trigger AS $$
+BEGIN
+INSERT INTO CPG
+ VALUES(
+	new.course_no,
+	(SELECT distinct s.faculty 
+	FROM past_student_enrollment pse, section s
+	WHERE pse.sect_id = s.sect_id
+	AND pse.course_no = new.course_no
+	AND pse.quarter = s.quarter
+	AND pse.year = s.year
+	AND s.sect_id = new.sect_id
+	),
+	substring(new.grade from 1 for 1),
+	1);
+ INSERT INTO CPQG
+ VALUES(
+	new.course_no,
+	(SELECT distinct s.faculty 
+	FROM past_student_enrollment pse, section s
+	WHERE pse.sect_id = s.sect_id
+	AND pse.course_no = new.course_no
+	AND pse.quarter = s.quarter
+	AND pse.year = s.year
+	AND s.sect_id = new.sect_id
+	),
+	new.quarter,
+	new.year,
+	substring(new.grade from 1 for 1),
+	1)
+ RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insertCPG
+BEFORE INSERT ON past_student_enrollment
+FOR EACH ROW 
+EXECUTE PROCEDURE log_insertCPG();
+
+//TESTING
+insert into past_student_enrollment
+values(40, 'CSE105', 101 , 'Letter', 'A-', 'WI', 2015);
+select * from cpqg;
