@@ -1,0 +1,21 @@
+COMPLETED MILESTONE 4: STUDENT CAPACITY
+
+CREATE OR REPLACE FUNCTION checkRegister()
+  RETURNS trigger AS $$
+BEGIN
+	IF ((SELECT COUNT(ssn)  FROM register r WHERE  r.sect_id = new.sect_id) < (select maxcap from section s where s.sect_id = new.sect_id))
+	THEN
+		RETURN NEW;
+	ELSE
+		RAISE EXCEPTION 'Student cannot be enrolled because the section is at capacity';
+		RETURN NULL;
+	END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER registerViolation
+BEFORE INSERT ON register
+FOR EACH ROW 
+EXECUTE PROCEDURE checkRegister();
+
+

@@ -1,0 +1,54 @@
+COMPLETED MILESTONE 4: PROFESSOR CONFLICT AND TIME CONFLICT MERGE
+
+drop trigger sectionviolation on section_temp;
+
+CREATE OR REPLACE FUNCTION checkSection()
+  RETURNS trigger AS $$
+BEGIN
+	IF EXISTS
+	((SELECT s.sect_id FROM section s WHERE
+	s.faculty = new.faculty
+	AND ((new.lect_time_start >= s.lec_time_start AND new.lect_time_start <= s.lect_time_end) OR
+	(new.lect_time_end >= s.lec_time_start AND new.lect_time_end <= s.lect_time_end))
+	AND ((POSITION(new.lect_date_id IN s.lect_date_id) > 0) OR (POSITION(s.lect_date_id IN new.lect_date_id) > 0))))
+	OR
+	((SELECT s.sect_id FROM section s WHERE
+	s.faculty = new.faculty
+	AND s.f_id = new.f_id))
+	THEN
+		RAISE EXCEPTION 'Newly added section has a professor violation';
+		RETURN NULL;
+	ELSIF
+	(
+	(((new.lect_time_start >= new.dis_time_start AND new.lect_time_start <= new.dis_time_end) 
+                         OR (new.lect_time_end >= new.dis_time_start AND new.lect_time_end <= new.dis_time_end))
+    AND ((POSITION(new.lect_date_id IN new.dis_date_id) > 0) OR (POSITION(new.lect_date_id IN new.dis_date_id) > 0))
+	)
+	OR
+	(((new.lect_time_start >= (select l.l_time_start from labs l where l.lab_id = new.lab_id) AND new.lect_time_start <= (select l.l_time_stop from labs l where l.lab_id = new.lab_id))  
+		OR (new.lect_time_end >= (select l.l_time_start from labs l where l.lab_id = new.lab_id) AND new.lect_time_end <= (select l.l_time_stop from labs l where l.lab_id = new.lab_id)))
+   	AND ((POSITION(new.lect_date_id IN (select l.lab_date from labs l where l.lab_id = new.lab_id)) > 0) OR (POSITION((select l.lab_date from labs l where l.lab_id = new.lab_id) IN new.lect_date_id) > 0))
+	)
+	(((new.dis_time_start >= (select l.l_time_start from labs l where l.lab_id = new.lab_id) AND new.dis_time_start <= (select l.l_time_stop from labs l where l.lab_id = new.lab_id))  
+		OR (new.dis_time_end >= (select l.l_time_start from labs l where l.lab_id = new.lab_id) AND new.dis_time_end <= (select l.l_time_stop from labs l where l.lab_id = new.lab_id)))
+   	AND ((POSITION(new.dis_date_id IN (select l.lab_date from labs l where l.lab_id = new.lab_id)) > 0) OR (POSITION((select l.lab_date from labs l where l.lab_id = new.lab_id) IN new.dis_date_id) > 0))
+	)
+	OR
+	)
+	THEN
+		RAISE EXCEPTION 'Newly added section has a time violation';
+		RETURN NULL;
+	ELSE
+		INSERT INTO SECTION VALUES(new.sect_id, new.title, new.course_no, new.lect_date_id, new.dis_date_id, new.building, new.room, new.maxcap, new.lab_id, new.lect_time_start, new.lect_time_end, new.dis_time_start, new.dis_time_end, new.rev_id, new.quarter, new.year, new.faculty);
+		RETURN NEW;
+	END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER sectionViolation
+BEFORE INSERT ON section_temp
+FOR EACH ROW 
+EXECUTE PROCEDURE checkSection();
+
+
+	
